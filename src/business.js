@@ -74,8 +74,10 @@ document.getElementById("write-review").addEventListener("click", e => {
     const form = document.createElement("form")
     form.innerHTML = createBusinessForm()
     form.addEventListener("submit", e => {
+        // debugger
         e.preventDefault();
         sendBusinessData(e);
+        // e.target.reset();
         App.showAllBusinesses();
 
     })
@@ -111,7 +113,6 @@ function sendBusinessData(e){
     const current_user = JSON.parse(localStorage.getItem("current_user"))
     const content = e.target.review.value
     const rating = e.target.rating.value
-
       
     const name = e.target.name.value
     const description = e.target.description.value
@@ -147,9 +148,11 @@ function sendBusinessData(e){
     .then(response => {
     return response.json()})
     .then(obj => {
-        const div = document.createElement("div")
-        const element = document.getElementById("business-list")
-        Business.createBusinessDiv(div,obj)
-        element.appendChild(div)
+        const business_id = obj.id;
+        createReviewFromNestedData(content,rating,current_user.id,business_id)
+        const div = document.createElement("div");
+        const element = document.getElementById("business-list");
+        createBusinessDiv(div,obj);
+        element.appendChild(div);
         console.log(obj)})
 }

@@ -45,3 +45,25 @@ function sendReviewData(e,businessID,reviewsList){
 }
 
 
+function createReviewFromNestedData(content,rating,userID, businessID){
+    const formData = {
+        content: content,
+        rating: rating,
+        business_id: businessID,
+        user_id: userID
+        };
+        let configObj = {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify(formData)
+        };
+    
+        fetch("http://localhost:3000/reviews",configObj)
+        .then(response => {
+        return response.json()})
+        .then(obj => {
+            console.log(obj)})
+}

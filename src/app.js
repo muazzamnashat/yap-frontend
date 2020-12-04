@@ -32,9 +32,10 @@ class App {
 
     static showAllBusinesses(){
         
-        document.getElementById("login-div").style.visibility = 'hidden';
-        document.getElementById("write-review-form").style.visibility = 'hidden';
+        document.getElementById("login-div").innerHTML = '';
+        document.getElementById("write-review-form").innerHTML = '';
+        document.getElementById("write-review").style.visibility = 'visible';
         document.getElementById("business-list").style.visibility = 'visible';
-        document.getElementById("business-show").style.visibility = 'hidden'; 
+        document.getElementById("business-show").innerHTML = ''; 
     }
 }

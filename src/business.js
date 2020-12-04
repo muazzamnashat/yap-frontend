@@ -151,8 +151,19 @@ function sendBusinessData(e){
         const business_id = obj.id;
         createReviewFromNestedData(content,rating,current_user.id,business_id)
         const div = document.createElement("div");
-        const element = document.getElementById("business-list");
+        const anchor = document.createElement("a")
+
+        anchor.setAttribute("href","#")
+        anchor.addEventListener("click",e =>{
+            e.stopPropagation()
+            API.fetchBusiness(obj)
+        })
+        anchor.innerText = obj.name
+        div.appendChild(anchor)
+        // const element = document.getElementById("business-list");
+        const element = document.getElementById("newlyCreated");
         createBusinessDiv(div,obj);
         element.appendChild(div);
+        // debugger
         console.log(obj)})
 }

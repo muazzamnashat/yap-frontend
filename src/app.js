@@ -1,10 +1,11 @@
 class App {
     static run(){
+        App.showAllBusinesses();
         API.getAllBusinesses();
     }
 
     static loadLoginPage(){
-        // App.hideAllElements();
+        App.hideAllElements();
         const div = document.getElementById("login-div")
         const form = document.createElement('form');
         form.id = "loginForm"

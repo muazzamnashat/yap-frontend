@@ -23,7 +23,9 @@ class Business{
     static loadBusiness(object){
 
         const element = document.getElementById("business-list")
+        const reviewButton = document.getElementById("write-review")
         element.style.visibility = 'hidden';
+        reviewButton.style.visibility = 'hidden';
         const div = document.createElement("div")
         const reviews = document.createElement("div")
         const form = document.createElement("form")

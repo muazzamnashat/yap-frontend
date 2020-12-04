@@ -24,14 +24,17 @@ class App {
         div.appendChild(form)
     } 
 
-    // static hideAllElements(){
-    //     document.getElementById("business-list").style.visibility = 'hidden';
-    //     document.getElementById("business-show").style.visibility = 'hidden'; 
-    // }
+    static hideAllElements(){
+        document.getElementById("write-review").style.visibility = 'hidden';
+        document.getElementById("business-list").style.visibility = 'hidden';
+        document.getElementById("business-show").style.visibility = 'hidden'; 
+    }
 
-    // static showAllElements(){
-    //     document.getElementById("login-div").style.visibility = 'hidden';
-    //     document.getElementById("business-list").style.visibility = 'visible';
-    //     document.getElementById("business-show").style.visibility = 'visible'; 
-    // }
+    static showAllBusinesses(){
+        
+        document.getElementById("login-div").style.visibility = 'hidden';
+        document.getElementById("write-review-form").style.visibility = 'hidden';
+        document.getElementById("business-list").style.visibility = 'visible';
+        document.getElementById("business-show").style.visibility = 'hidden'; 
+    }
 }

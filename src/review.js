@@ -12,7 +12,7 @@ class Review {
 
 function createReviewForm(){
     return `
-    Write your review here: <input type="text" id="content" name="content" ><br>
+    Write your review here: <textarea id="content" name="content"> </textarea><br>
     Rating: <input type="number" id="rating" name="rating"><br><br>
     <input type="submit" value="Submit">
     `
@@ -43,3 +43,5 @@ function sendReviewData(e,businessID,reviewsList){
         Review.createReview(reviewsList,obj)
         console.log(obj)})
 }
+
+

@@ -7,13 +7,12 @@ window.addEventListener('DOMContentLoaded', (event) => {
     App.loadLoginPage();
   }
   
-  
-
-
   document.getElementById("welcome-tag").addEventListener("click",e => {
     const element = document.getElementById("business-list")
     element.style.visibility = 'visible';
-    document.getElementById("business-show").innerHTML="";})
+    document.getElementById("write-review").style.visibility = 'visible';
+    document.getElementById("business-show").innerHTML="";
+    document.getElementById("write-review-form").innerHTML="";})
   
   })
   

@@ -8,10 +8,11 @@ class User {
     }
 
     static sendUserData(e){
-        const user = new User({first_name: e.target.first_name.value,last_name:e.target.last_name.value})
+        const user = new User({first_name: e.target.first_name.value,last_name:e.target.last_name.value,email:e.target.email.value})
         const formData = {
             first_name:  user.first_name,
-            last_name: user.last_name
+            last_name: user.last_name,
+            email: user.email
             };
         
         let configObj = {
@@ -27,8 +28,15 @@ class User {
         .then(response => {
         return response.json()})
         .then(obj => {
-            localStorage.setItem("current_user",JSON.stringify(obj))
-            console.log(obj)})
+            if (Array.isArray(obj)){
+                alert(obj[0]);
+                location.reload();
+            } else {
+                localStorage.setItem("current_user",JSON.stringify(obj))
+            }
+            // debugger
+        })
+        
     }
 
 }

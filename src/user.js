@@ -28,6 +28,7 @@ class User {
         .then(response => {
         return response.json()})
         .then(obj => {
+            // debugger
             if (Array.isArray(obj)){
                 alert(obj[0]);
                 location.reload();
@@ -37,6 +38,36 @@ class User {
             // debugger
         })
         
+    }
+
+
+    static getUserData(e){
+        const formData = {
+            email: e.target.email.value
+            };
+
+        let configObj = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(formData)
+            };
+
+        fetch("http://localhost:3000/login",configObj)
+        .then(response => {
+        return response.json()})
+        .then(obj => {
+            // debugger
+            if (obj.error){
+                alert(obj.error);
+                location.reload();
+            } else {
+                localStorage.setItem("current_user",JSON.stringify(obj))
+            }
+            // debugger
+        })
     }
 
 }

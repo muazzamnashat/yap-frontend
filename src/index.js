@@ -4,6 +4,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   if (localStorage.getItem("current_user")) {
     App.run();
   } else {
+    App.loadSignupPage();
     App.loadLoginPage();
   }
   

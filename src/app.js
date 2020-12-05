@@ -4,16 +4,16 @@ class App {
         API.getAllBusinesses();
     }
 
-    static loadLoginPage(){
+    static loadSignupPage(){
         App.hideAllElements();
-        const div = document.getElementById("login-div")
+        const div = document.getElementById("signup-div")
         const form = document.createElement('form');
-        form.id = "loginForm"
+        form.id = "signupForm"
         form.addEventListener("submit", e => {
             e.preventDefault();
             User.sendUserData(e);
             e.target.reset();
-            document.getElementById("login-div").style.visibility = 'hidden';
+            document.getElementById("signup-div").style.visibility = 'hidden';
             App.run();
 
         })
@@ -21,7 +21,7 @@ class App {
         <input type="text" placeholder="Enter first name" name="first_name" required><br>
         <input type="text" placeholder="Enter last name" name="last_name" required><br>
         <input type="text" placeholder="Enter your email" name="email" required><br>
-        <button type="submit">Login</button>
+        <button type="submit">Sign Up</button>
         `
         div.appendChild(form)
     } 
@@ -34,10 +34,30 @@ class App {
 
     static showAllBusinesses(){
         
+        document.getElementById("signup-div").innerHTML = '';
         document.getElementById("login-div").innerHTML = '';
         document.getElementById("write-review-form").innerHTML = '';
         document.getElementById("write-review").style.visibility = 'visible';
         document.getElementById("business-list").style.visibility = 'visible';
         document.getElementById("business-show").innerHTML = ''; 
+    }
+
+    static loadLoginPage(){
+        const div = document.getElementById("login-div")
+        const form = document.createElement('form');
+        form.id = "loginForm"
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+            User.getUserData(e);
+            e.target.reset();
+            document.getElementById("login-div").style.visibility = 'hidden';
+            App.run();
+
+        })
+        form.innerHTML = `
+        <input type="text" placeholder="Enter your email" name="email" required><br>
+        <button type="submit">Login</button>
+        `
+        div.appendChild(form)
     }
 }

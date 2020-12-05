@@ -1,0 +1,18 @@
+#background{
+    background-image: url("src/images/Wide-Table-Shot-01.png");
+    height: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+#search-bar{
+    margin: auto;
+    width: 50%;
+    padding-top: 50px;
+}

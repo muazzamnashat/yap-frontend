@@ -12,7 +12,7 @@ class User {
         const formData = {
             first_name:  user.first_name,
             last_name: user.last_name,
-            email: user.email
+            email: user.email.toLowerCase()
             };
         
         let configObj = {
@@ -43,7 +43,7 @@ class User {
 
     static getUserData(e){
         const formData = {
-            email: e.target.email.value
+            email: e.target.email.value.toLowerCase()
             };
 
         let configObj = {
@@ -64,10 +64,24 @@ class User {
                 alert(obj.error);
                 location.reload();
             } else {
+                // debugger
                 localStorage.setItem("current_user",JSON.stringify(obj))
             }
             // debugger
         })
     }
 
+    static getUserById(id){
+        
+        return fetch(`http://localhost:3000/users/${id}`)
+        .then(response => response.json())
+        .then(object => {
+           return createUser(object)})
+    }
+
+}
+
+function createUser(obj){
+    let user = new User(obj);
+    return user;
 }

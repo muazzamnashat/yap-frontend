@@ -7,8 +7,8 @@ class Business{
 
         anchor.setAttribute("href","#")
         anchor.addEventListener("click",e =>{
-            e.stopPropagation()
-            API.fetchBusiness(object)
+            e.stopPropagation();
+            API.fetchBusiness(object);
         })
         anchor.innerText = object.name
 
@@ -24,6 +24,8 @@ class Business{
 
         const element = document.getElementById("business-list")
         const reviewButton = document.getElementById("write-review")
+        const background = document.getElementById("background")
+        background.style.visibility = 'hidden';
         element.style.visibility = 'hidden';
         reviewButton.style.visibility = 'hidden';
         const div = document.createElement("div")
@@ -45,7 +47,11 @@ class Business{
         document.getElementById("business-show").appendChild(form)
         // to prevent it from hiding when get back to this like from welcome yap logo click
         document.getElementById("business-show").style.visibility="visible";
-     
+
+        //activate edit and delete buttons 
+        // debugger
+        
+        
     }
 }
 

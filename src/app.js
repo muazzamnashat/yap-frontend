@@ -27,13 +27,15 @@ class App {
     } 
 
     static hideAllElements(){
+        document.getElementById("background").style.visibility = 'hidden';
         document.getElementById("write-review").style.visibility = 'hidden';
         document.getElementById("business-list").style.visibility = 'hidden';
         document.getElementById("business-show").style.visibility = 'hidden'; 
     }
 
     static showAllBusinesses(){
-        
+
+        document.getElementById("background").style.visibility = 'visible';
         document.getElementById("signup-div").innerHTML = '';
         document.getElementById("login-div").innerHTML = '';
         document.getElementById("write-review-form").innerHTML = '';

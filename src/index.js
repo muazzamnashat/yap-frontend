@@ -9,9 +9,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
   
   document.getElementById("welcome-tag").addEventListener("click",e => {
-    const element = document.getElementById("business-list")
+    const element = document.getElementById("business-list");
     element.style.visibility = 'visible';
     document.getElementById("write-review").style.visibility = 'visible';
+    document.getElementById("background").style.visibility = 'visible';
     document.getElementById("business-show").innerHTML="";
     document.getElementById("write-review-form").innerHTML="";
   })

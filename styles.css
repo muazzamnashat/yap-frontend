@@ -3,7 +3,7 @@
     height: 50%;
     /* background-position: center; */
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover
 }
 
 body, html {
@@ -15,5 +15,14 @@ body, html {
 #search-bar{
     margin: auto;
     width: 50%;
+    padding-top: 50px;
+}
+
+.search{
+    margin: auto;
+    width: 50%;
+}
+
+#business-list{
     padding-top: 50px;
 }

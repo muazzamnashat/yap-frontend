@@ -2,7 +2,6 @@
 
 <html>
   <head>
-  
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title></title>
@@ -12,7 +11,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body >
-  <h1 id="welcome-tag">Welcome to Yap!</h1>
+    <nav class="navbar navbar-light bg-light">
+      <span id="welcome-tag" class="navbar-brand mb-0 h1">create a logo here!</span>
+    </nav>
+  <!-- <h1 id="welcome-tag">create a logo here!</h1> -->
 
   <div id="write-review-form"></div>
 
@@ -21,6 +23,7 @@
 <div id= "results"></div>
   <div id="business-show"></div>
   <div id="background">
+
     <button id="write-review">Write a review here!</button><br><br>
    
     <form class="input-group mb-3" id="search-bar" >
@@ -30,15 +33,15 @@
         <button id= "search-bar-submit" type="button" class="btn btn-dark">Search</button>
       </div>
     </form> <br>
-    <div id= "search-result"> </div>
+    <div id= "search-result" class="list-group search"> </div>
 
 
 
   </div>
-    <div id="business-list">
+    <ul id="business-list" >
         
         <div id="newlyCreated"></div>
-    </div>
+    </ul>
 
     <!--- bootstrap--->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

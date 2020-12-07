@@ -1,11 +1,21 @@
 class Business{
 
+    //  get the object from API call and create each businesses and attach to the list (Index page)
     static insertBusinessesToList(object){
         const list = document.getElementById("business-list");
+        const outerDiv = document.createElement("div");
+        outerDiv.setAttribute("class","media");
         const div = document.createElement("div")
-        const anchor = document.createElement("a")
+        div.setAttribute("class","media-body")
+        const img = document.createElement("img")
+        img.setAttribute("class","mr-3")
+        img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
+        img.setAttribute("alt","Not found")
 
+        const anchor = document.createElement("a")
+        
         anchor.setAttribute("href","#")
+        anchor.setAttribute("class","mt-0")
         anchor.addEventListener("click",e =>{
             e.stopPropagation();
             API.fetchBusiness(object);
@@ -16,8 +26,9 @@ class Business{
         div.appendChild(anchor)
         div.dataset.tabFor= object.id
         createBusinessDiv(div, object)
-
-        list.appendChild(div);
+        outerDiv.appendChild(img);
+        outerDiv.appendChild(div);
+        list.appendChild(outerDiv);
     }
 
     static loadBusiness(object){
@@ -47,11 +58,6 @@ class Business{
         document.getElementById("business-show").appendChild(form)
         // to prevent it from hiding when get back to this like from welcome yap logo click
         document.getElementById("business-show").style.visibility="visible";
-
-        //activate edit and delete buttons 
-        // debugger
-        
-        
     }
 }
 
@@ -94,7 +100,7 @@ document.getElementById("write-review").addEventListener("click", e => {
 
 function createBusinessForm(){
     return `
-    <p>Write a review here <br></p>
+    <p>Review your favorite businesses and share your experiences with our community.</p>
     
     Name of the business : <input type="text" name="name" ><br><br>
     Description : <textarea name="description"> </textarea><br><br>

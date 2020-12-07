@@ -28,19 +28,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 result.push(obj)
                 let node = document.createElement("a")
                 node.setAttribute("href","#")
+                node.setAttribute("class","list-group-item list-group-item-action")
                 node.innerText = obj.name
                 node.addEventListener("click", e => {
-                  Business.loadBusiness(obj)
+                  document.getElementById("search-bar").reset();
+                  Business.loadBusiness(obj);
                 })
                 if (resultDisplay.childNodes.length < 5) resultDisplay.appendChild(node)
               } 
             })    
         })
-
-        document.getElementById("search-bar-submit").addEventListener("click", e => {
-          document.getElementById("search-bar").reset();
-          displaySearchResult(result);
-        })
+    document.getElementById("search-bar-submit").addEventListener("click", e => {
+      document.getElementById("search-bar").reset();
+      displaySearchResult(result);
+    })
   })
 
   

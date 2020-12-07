@@ -63,3 +63,25 @@ class App {
         div.appendChild(form)
     }
 }
+
+const displaySearchResult = (result) => {
+    document.getElementById("search-result").innerHTML =""
+    App.hideAllElements();
+    result.forEach(object => {
+        const div = document.createElement("div")
+        const anchor = document.createElement("a")
+
+        anchor.setAttribute("href","#")
+        anchor.addEventListener("click",e =>{
+            e.stopPropagation();
+            API.fetchBusiness(object);
+            document.getElementById("results").innerHTML=""
+        })
+        anchor.innerText = object.name
+        div.appendChild(anchor)
+        div.dataset.tabFor= object.id
+        createBusinessDiv(div, object)
+
+        document.getElementById("results").appendChild(div) 
+    })
+}

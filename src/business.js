@@ -12,8 +12,8 @@ class Business{
         img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
         img.setAttribute("alt","Not found")
 
+        // takes to the business show page
         const anchor = document.createElement("a")
-        
         anchor.setAttribute("href","#")
         anchor.setAttribute("class","mt-0")
         anchor.addEventListener("click",e =>{
@@ -21,7 +21,6 @@ class Business{
             API.fetchBusiness(object);
         })
         anchor.innerText = object.name
-
         
         div.appendChild(anchor)
         div.dataset.tabFor= object.id
@@ -46,11 +45,14 @@ class Business{
         form.addEventListener("submit",e => {
             e.preventDefault();
             sendReviewData(e,object.id,reviews);
-            // debugger
             e.target.reset();
             API.getUpdatedRating(object.id)
         })
         reviews.innerText = "Recommended Reviews"
+
+        document.getElementById("business-show").innerHTML = `<h2>${object.name}</h2>`
+
+        // create business description on the business show page
         createBusinessDiv(div, object)
         
         object.reviews.forEach(review => Review.createReview(reviews,review))
@@ -64,6 +66,7 @@ class Business{
 }
 
 function createBusinessDiv(target, object){
+   
     const rating = document.createElement("p");
     const desc = document.createElement("p");
     const address = document.createElement("p");
@@ -109,23 +112,28 @@ function createBusinessForm(){
     return `
     <p>Review your favorite businesses and share your experiences with our community.</p>
     
-    Name of the business : <input type="text" name="name" ><br><br>
-    Description : <textarea name="description"> </textarea><br><br>
-    Address : <input type="text" name="address" ><br><br>
-    State : <input type="text" name="state" ><br><br>
-    Zip : <input type="number" name="zip"><br><br>
-    Contact : <input type="number" name="contact"><br><br>
-    Website : <input type="text" name="website"><br><br>
-    Price : <input type="number" name="price"><br><br>
-    Review : <textarea name="review"> </textarea><br><br>
-    Rating : <input type="number" name="rating"><br><br>
-    
-    <input type="submit" value="Submit">
+    <div class="form-row">
+        <div class="col">
+            <input class="form-control" type="text" name="name"  placeholder="Name" ><br>
+            Description the business : <textarea class="form-control" name="description" > </textarea><br>
+            Review : <textarea class="form-control" name="review"> </textarea placeholder="Review"><br>
+            Rating: <select class="form-control" name="rating" >
+                        <option value=1>1</option>
+                        <option value=2>2</option>
+                        <option value=3>3</option>
+                        <option value=4>4</option>
+                        <option value=5>5</option>
+                    </select>
+            <input class="form-control" type="number" name="price" placeholder="Price range between 1 to 5"><br>
+            <input class="form-control" type="text" name="address"  placeholder="Address"><br>        
+            <input class="form-control" type="text" name="state"  placeholder="State"><br>
+            <input class="form-control" type="number" name="zip" placeholder="Zip"><br>
+            <input class="form-control" type="number" name="contact" placeholder="Phone number"><br>
+            <input class="form-control" type="text" name="website" placeholder="Website"><br>
+        </div>
+    </div>
+    <input  class="btn btn-primary" type="submit" value="Submit">
     `
-}
-
-function createBusiness(){
-
 }
 
 
@@ -169,6 +177,7 @@ function sendBusinessData(e){
     .then(response => {
     return response.json()})
     .then(obj => {
+        // console.log(obj)
         const business_id = obj.id;
         createReviewFromNestedData(content,rating,current_user.id,business_id)
         const div = document.createElement("div");
@@ -186,5 +195,7 @@ function sendBusinessData(e){
         createBusinessDiv(div,obj);
         element.appendChild(div);
         // debugger
-        console.log(obj)})
+        
+    })
+    // .catch (error => console.log(error.messages))
 }

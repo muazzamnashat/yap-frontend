@@ -43,7 +43,6 @@ function insertReviewData(user,target,review){
     })
 
     p1.innerText = `User: ${user.first_name} ${user.last_name}`
-  
     p2.innerText = `${review.rating}`
     p3.innerText = `${review.content}`
 
@@ -65,7 +64,9 @@ function insertReviewData(user,target,review){
 
 function createReviewForm(){
     return `
-    Write your review here: <textarea id="content" name="content"> </textarea><br>
+    Write your review here!
+    <div class="form-group">
+    <textarea id="content" name="content"> </textarea><br>
     Rating: <select name="rating" id="rating">
         <option value=1>1</option>
         <option value=2>2</option>
@@ -73,7 +74,8 @@ function createReviewForm(){
         <option value=4>4</option>
         <option value=5>5</option>
     </select>
-    <input type="submit" value="Submit">
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit">
     `
 }
 
@@ -126,8 +128,7 @@ function createReviewFromNestedData(content,rating,userID, businessID){
         fetch("http://localhost:3000/reviews",configObj)
         .then(response => {
         return response.json()})
-        .then(obj => {
-            console.log(obj)})
+        .then(obj => console.log(obj))
 }
 
 
@@ -156,3 +157,4 @@ function makeChangesToReview(review_id, rating,content) {
 function updateRating(obj){
     document.getElementById(`rating-${obj.id}`).innerText = `Rating: ${obj.rating}`
 }
+

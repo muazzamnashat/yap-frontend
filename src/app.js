@@ -8,6 +8,7 @@ class App {
         App.hideAllElements();
         const div = document.getElementById("signup-div")
         const form = document.createElement('form');
+        form.setAttribute("class","form-group")
         form.id = "signupForm"
         form.addEventListener("submit", e => {
             e.preventDefault();
@@ -18,10 +19,10 @@ class App {
 
         })
         form.innerHTML = `
-        <input type="text" placeholder="Enter first name" name="first_name" required><br>
-        <input type="text" placeholder="Enter last name" name="last_name" required><br>
-        <input type="text" placeholder="Enter your email" name="email" required><br>
-        <button type="submit">Sign Up</button>
+        <input class="form-control"  type="text" placeholder="Enter first name" name="first_name" required><br>
+        <input class="form-control"  type="text" placeholder="Enter last name" name="last_name" required><br>
+        <input class="form-control"  type="email" placeholder="Enter your email" name="email" required><br>
+        <button class="btn btn-primary" type="submit">Sign Up</button>
         `
         div.appendChild(form)
     } 
@@ -47,6 +48,7 @@ class App {
     static loadLoginPage(){
         const div = document.getElementById("login-div")
         const form = document.createElement('form');
+        form.setAttribute("class","form-group")
         form.id = "loginForm"
         form.addEventListener("submit", e => {
             e.preventDefault();
@@ -57,8 +59,8 @@ class App {
 
         })
         form.innerHTML = `
-        <input type="text" placeholder="Enter your email" name="email" required><br>
-        <button type="submit">Login</button>
+        <input type="text" class="form-control" placeholder="Enter your email" name="email" required><br>
+        <button class="btn btn-primary" type="submit">Login</button>
         `
         div.appendChild(form)
     }

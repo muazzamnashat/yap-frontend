@@ -20,4 +20,13 @@ class API {
         })
     }
 
+    static getUpdatedRating(id){
+        fetch(`${HOME_URL}businesses/${id}`)
+        .then(response => response.json())
+        .then(response => {
+            // debugger
+            updateRating(response)
+        })
+    }
+
 }

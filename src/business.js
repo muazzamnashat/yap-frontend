@@ -44,9 +44,11 @@ class Business{
         const form = document.createElement("form")
         form.setAttribute("data-business-ID",object.id)
         form.addEventListener("submit",e => {
-        e.preventDefault();
-        sendReviewData(e,object.id,reviews);
-        e.target.reset();
+            e.preventDefault();
+            sendReviewData(e,object.id,reviews);
+            // debugger
+            e.target.reset();
+            API.getUpdatedRating(object.id)
         })
         reviews.innerText = "Recommended Reviews"
         createBusinessDiv(div, object)
@@ -62,10 +64,15 @@ class Business{
 }
 
 function createBusinessDiv(target, object){
+    const rating = document.createElement("p");
     const desc = document.createElement("p");
     const address = document.createElement("p");
     const website = document.createElement("p");
     const contact = document.createElement("p");
+
+    rating.innerText = `Rating: ${object.rating}`
+    rating.id = `rating-${object.id}`
+    target.appendChild(rating)
 
     desc.innerText = `Description: ${object.description}`
     target.appendChild(desc)

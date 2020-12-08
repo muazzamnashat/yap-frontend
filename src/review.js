@@ -28,8 +28,11 @@ function insertReviewData(user,target,review){
             fetch(`http://localhost:3000/reviews/${e.target.dataset.id}`,{
                 method: "DELETE"
             })
+            .then(resp => resp.json())
+            .then(resp => API.getUpdatedRating(review.business_id))
             e.target.parentElement.remove()
         }
+        
     })
 
     editBtn.addEventListener("click", e => {
@@ -96,7 +99,10 @@ function sendReviewData(e,businessID,reviewsList){
     .then(response => {
     return response.json()})
     .then(obj => {
-        Review.createReview(reviewsList,obj)
+        // debugger
+        //display updated rating on business show page
+        API.getUpdatedRating(businessID);
+        Review.createReview(reviewsList,obj);
         console.log(obj)})
 }
 
@@ -141,6 +147,12 @@ function makeChangesToReview(review_id, rating,content) {
     fetch(`http://localhost:3000/reviews/${review_id}`,configObj)
     .then (response => response.json())
     .then (obj => {
+        API.getUpdatedRating(obj.business_id);
         console.log(obj)})
 
+}
+
+
+function updateRating(obj){
+    document.getElementById(`rating-${obj.id}`).innerText = `Rating: ${obj.rating}`
 }

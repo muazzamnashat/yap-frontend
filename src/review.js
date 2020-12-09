@@ -1,4 +1,11 @@
 class Review {
+    constructor(props){
+        this.content = props.content
+        this.rating = props.rating
+        this.business_id = props.business_id
+        this.user_id = props.user_id
+    }
+
     static createReview (target, review){
         fetch(`http://localhost:3000/users/${review.user_id}`)
         .then(response => response.json())
@@ -20,9 +27,9 @@ function insertReviewData(user,target,review){
 
     delBtn.setAttribute("class","btn btn-primary btn-sm")
     delBtn.setAttribute("style","margin-right:16px")
-    delBtn.setAttribute("Data-id","delete-review")
+    delBtn.setAttribute("Data-id",`${review.id}`)
     editBtn.setAttribute("class", "btn btn-primary btn-sm") 
-    editBtn.setAttribute("Data-id","edit-review")
+    editBtn.setAttribute("Data-id",`${review.id}`)
 
     delBtn.addEventListener("click",(e) =>{
         if(confirm("Delete?")) {
@@ -110,26 +117,20 @@ function sendReviewData(e,businessID,reviewsList){
 }
 
 
-function createReviewFromNestedData(content,rating,userID, businessID){
-    const formData = {
-        content: content,
-        rating: rating,
-        business_id: businessID,
-        user_id: userID
-        };
-        let configObj = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify(formData)
-        };
-    
-        fetch("http://localhost:3000/reviews",configObj)
-        .then(response => {
-        return response.json()})
-        .then(obj => console.log(obj))
+function createReviewFromNestedData(review){
+    let configObj = {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify(review)
+    };
+
+    fetch("http://localhost:3000/reviews",configObj)
+    .then(response => {
+    return response.json()})
+    .then(obj => console.log(obj))
 }
 
 
@@ -156,6 +157,7 @@ function makeChangesToReview(review_id, rating,content) {
 
 
 function updateRating(obj){
+    // debugger
     document.getElementById(`rating-${obj.id}`).innerText = `Rating: ${obj.rating}`
 }
 

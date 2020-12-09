@@ -8,7 +8,7 @@ class Business{
         this.zip = props.zip
         this.contact = props.contact
         this.website = props.website
-        this.rating = props.rating
+        this.rating = props.rating || 0
         this.price = props.price
     }
 
@@ -141,7 +141,7 @@ document.getElementById("write-review").addEventListener("click", e => {
         let result = []
         let searchTerm = e.target.value.split(" ").join("%20")
         // console.log(searchTerm)
-        fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDmArjjGoB4yQWdjrEUn5KFmgpIF7jT91U`)
+        fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=`)
         .then(response => response.json())
         .then(resp => {
             console.log(resp.candidates[0].formatted_address)})
@@ -177,7 +177,7 @@ function createBusinessForm(){
 
 function sendBusinessData(e){
 
-    const current_user = JSON.parse(localStorage.getItem("current_user"))
+    const user_id = JSON.parse(localStorage.getItem("current_user")).id
     const content = e.target.review.value
     const rating = e.target.rating.value
     
@@ -191,7 +191,7 @@ function sendBusinessData(e){
         website : e.target.website.value,
         price : e.target.price.value
     })
-
+    
     let configObj = {
     method: "POST",
     headers: {
@@ -207,7 +207,10 @@ function sendBusinessData(e){
     .then(obj => {
         // console.log(obj)
         const business_id = obj.id;
-        createReviewFromNestedData(content,rating,current_user.id,business_id)
+        const business_info = {content, rating, user_id,business_id}
+        const review = new Review(business_info)
+        // debugger
+        createReviewFromNestedData(review)
         const div = document.createElement("div");
         const anchor = document.createElement("a")
 

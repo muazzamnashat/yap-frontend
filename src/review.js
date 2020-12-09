@@ -18,10 +18,11 @@ function insertReviewData(user,target,review){
     const delBtn = document.createElement("button")
     const editBtn = document.createElement("button")
 
-    delBtn.setAttribute("class","review-delete")
-    delBtn.setAttribute("Data-id",`${review.id}`)
-    editBtn.setAttribute("class", "review-edit") 
-    editBtn.setAttribute("Data-id",`${review.id}`)
+    delBtn.setAttribute("class","btn btn-primary btn-sm")
+    delBtn.setAttribute("style","margin-right:16px")
+    delBtn.setAttribute("Data-id","delete-review")
+    editBtn.setAttribute("class", "btn btn-primary btn-sm") 
+    editBtn.setAttribute("Data-id","edit-review")
 
     delBtn.addEventListener("click",(e) =>{
         if(confirm("Delete?")) {
@@ -66,8 +67,8 @@ function createReviewForm(){
     return `
     Write your review here!
     <div class="form-group">
-    <textarea id="content" name="content"> </textarea><br>
-    Rating: <select name="rating" id="rating">
+    <textarea id="content" class="form-control"  name="content"> </textarea><br>
+    Rating: <select class="form-control"  name="rating" id="rating">
         <option value=1>1</option>
         <option value=2>2</option>
         <option value=3>3</option>

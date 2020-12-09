@@ -1,5 +1,17 @@
 class Business{
 
+    constructor(props){
+        this.name = props.name
+        this.description = props.description
+        this.address = props.address
+        this.state = props.state
+        this.zip = props.zip
+        this.contact = props.contact
+        this.website = props.website
+        this.rating = props.rating
+        this.price = props.price
+    }
+
     //  get the object from API call and create each businesses and attach to the list (Index page)
     static insertBusinessesToList(object){
         const list = document.getElementById("business-list");
@@ -39,8 +51,10 @@ class Business{
         element.style.visibility = 'hidden';
         reviewButton.style.visibility = 'hidden';
         const div = document.createElement("div")
+        div.setAttribute("class","container-fluid")
         const reviews = document.createElement("div")
         const form = document.createElement("form")
+        form.setAttribute("class","container-fluid")
         form.setAttribute("data-business-ID",object.id)
         form.addEventListener("submit",e => {
             e.preventDefault();
@@ -48,7 +62,7 @@ class Business{
             e.target.reset();
             API.getUpdatedRating(object.id)
         })
-        reviews.innerText = "Recommended Reviews"
+        reviews.innerHTML = `<p>Recommended Reviews</p>`
 
         document.getElementById("business-show").innerHTML = `<h2>${object.name}</h2>`
 
@@ -73,20 +87,20 @@ function createBusinessDiv(target, object){
     const website = document.createElement("p");
     const contact = document.createElement("p");
 
-    rating.innerText = `Rating: ${object.rating}`
+    rating.innerHTML = `<b>Rating:</b> ${object.rating}`
     rating.id = `rating-${object.id}`
     target.appendChild(rating)
 
-    desc.innerText = `Description: ${object.description}`
+    desc.innerHTML = `<b>Description:</b> ${object.description}`
     target.appendChild(desc)
 
-    address.innerText = `Address: ${object.address}`
+    address.innerHTML = `<b>Address:</b> ${object.address}`
     target.appendChild(address)
 
-    website.innerText = `Website: ${object.website}`
+    website.innerHTML = `<b>Website:</b> ${object.website}`
     target.appendChild(website)
 
-    contact.innerText = `Contact: ${object.contact}`
+    contact.innerHTML = `<b>Contact:</b> ${object.contact}`
     target.appendChild(contact)
     
 }
@@ -96,6 +110,18 @@ document.getElementById("write-review").addEventListener("click", e => {
     App.hideAllElements();
     const formDiv= document.getElementById("write-review-form")
     const form = document.createElement("form")
+
+    // for google api
+    const searchForm = `
+    <p>Review your favorite businesses and share your experiences with our community.</p>
+    <form class="input-group mb-3" id="search-business" >
+        <input id="search-bar-input" type="text" class="form-control" placeholder="Search Restaurant" > 
+        <div class="input-group-append">
+        <input class="btn btn-primary" type="submit" value="Search">
+        </div>
+    </form> <br>
+    `
+
     form.innerHTML = createBusinessForm()
     form.addEventListener("submit", e => {
         // debugger
@@ -103,15 +129,27 @@ document.getElementById("write-review").addEventListener("click", e => {
         sendBusinessData(e);
         // e.target.reset();
         App.showAllBusinesses();
-
     })
-    formDiv.appendChild(form)      
+
+     // for google api
+    formDiv.innerHTML += searchForm
+    formDiv.appendChild(form)
+    
+    
+    // for google api
+    document.getElementById("search-business").addEventListener("input", e => {
+        let result = []
+        let searchTerm = e.target.value.split(" ").join("%20")
+        // console.log(searchTerm)
+        fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyDmArjjGoB4yQWdjrEUn5KFmgpIF7jT91U`)
+        .then(response => response.json())
+        .then(resp => {
+            console.log(resp.candidates[0].formatted_address)})
+    })
 })
 
 function createBusinessForm(){
     return `
-    <p>Review your favorite businesses and share your experiences with our community.</p>
-    
     <div class="form-row">
         <div class="col">
             <input class="form-control" type="text" name="name"  placeholder="Name" ><br>
@@ -142,27 +180,17 @@ function sendBusinessData(e){
     const current_user = JSON.parse(localStorage.getItem("current_user"))
     const content = e.target.review.value
     const rating = e.target.rating.value
-      
-    const name = e.target.name.value
-    const description = e.target.description.value
-    const address = e.target.address.value
-    const state = e.target.state.value
-    const zip = e.target.zip.value
-    const contact = e.target.contact.value
-    const website = e.target.website.value
-    const price = e.target.price.value
-
-    const formData = {
-    name,
-    description,
-    address,
-    state,
-    zip,
-    contact,
-    website,
-    price
-    // user_id: current_user.id
-    };
+    
+    const business = new Business({
+        name : e.target.name.value,
+        description : e.target.description.value,
+        address : e.target.address.value,
+        state : e.target.state.value,
+        zip : e.target.zip.value,
+        contact : e.target.contact.value,
+        website : e.target.website.value,
+        price : e.target.price.value
+    })
 
     let configObj = {
     method: "POST",
@@ -170,7 +198,7 @@ function sendBusinessData(e){
         "Content-Type": "application/json",
         "Accept": "application/json"
     },
-    body: JSON.stringify(formData)
+    body: JSON.stringify(business)
     };
 // debugger
     fetch("http://localhost:3000/businesses",configObj)

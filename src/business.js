@@ -120,6 +120,7 @@ document.getElementById("write-review").addEventListener("click", e => {
         <input class="btn btn-primary" type="submit" value="Search">
         </div>
     </form> <br>
+    <div id="google-search-result"></div>
     `
 
     form.innerHTML = createBusinessForm()
@@ -135,16 +136,53 @@ document.getElementById("write-review").addEventListener("click", e => {
     formDiv.innerHTML += searchForm
     formDiv.appendChild(form)
     
-    
+    //keep count of the search result.Keep the list to 5 items only
+    let result = [];
+    let count = 0;
     // for google api
     document.getElementById("search-business").addEventListener("input", e => {
-        let result = []
-        let searchTerm = e.target.value.split(" ").join("%20")
+        e.stopPropagation();
+        
+        let searchTerm = e.target.value.split(" ").join("%20");
         // console.log(searchTerm)
-        fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=`)
-        .then(response => response.json())
-        .then(resp => {
-            console.log(resp.candidates[0].formatted_address)})
+        
+
+        if (e.target.value.length === 0 || count > 5) {
+            document.getElementById("google-search-result").innerHTML="";
+            count=0;
+            result=[];
+        }
+
+        if (e.target.value.length > 3){
+            fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours&key=${ENV.GOOGLE_KEY}`)
+            .then(response => response.json())
+            .then(resp => {
+                // debugger
+                const display = document.getElementById("google-search-result")
+                // result array prevent duplicates result
+                if (! result.includes(`${resp.candidates[0].formatted_address}`)){
+                    display.innerHTML += 
+                    `<br><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample-${resp.candidates[0].geometry.location.lat}" aria-expanded="false" aria-controls="collapseExample-${resp.candidates[0].geometry.location.lat}">
+                    ${resp.candidates[0].name}
+                    </button>
+                    <div class="collapse" id="collapseExample-${resp.candidates[0].geometry.location.lat}">
+                        <div class="card card-body">
+                            <b>Name:</b> ${resp.candidates[0].name}  <br>
+                            <b>Address:</b> ${resp.candidates[0].formatted_address} <br>
+                            <b>Rating:</b> ${resp.candidates[0].rating} <br>
+                            <button type="button" class="btn btn-outline-primary btn-sm">Add</button>
+                        </div>
+                    </div><br>
+                    `
+                    count ++; 
+                    result.push(`${resp.candidates[0].formatted_address}`);
+                    // debugger
+                    console.log(resp.candidates)
+                } 
+            })        
+        }
+
+        
     })
 })
 

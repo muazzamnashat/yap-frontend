@@ -8,7 +8,7 @@ class Business{
         this.zip = props.zip
         this.contact = props.contact
         this.website = props.website
-        this.rating = props.rating || 0
+        // this.rating = props.rating
         this.price = props.price
     }
 
@@ -206,27 +206,45 @@ function sendBusinessData(e){
     return response.json()})
     .then(obj => {
         // console.log(obj)
-        const business_id = obj.id;
+        const business_id = obj.id
         const business_info = {content, rating, user_id,business_id}
         const review = new Review(business_info)
         // debugger
-        createReviewFromNestedData(review)
-        const div = document.createElement("div");
-        const anchor = document.createElement("a")
-
-        anchor.setAttribute("href","#")
-        anchor.addEventListener("click",e =>{
-            e.stopPropagation()
-            API.fetchBusiness(obj)
-        })
-        anchor.innerText = obj.name
-        div.appendChild(anchor)
-        // const element = document.getElementById("business-list");
-        const element = document.getElementById("newlyCreated");
-        createBusinessDiv(div,obj);
-        element.appendChild(div);
-        // debugger
-        
+        createReviewFromNestedData(review) 
     })
+    // debugger
     // .catch (error => console.log(error.messages))
+}
+
+function newlyCreatedDivUpdate(business_id){
+    fetch(`${HOME_URL}businesses/${business_id}`)
+        .then(response => response.json())
+        .then(obj => {
+            // debugger
+            const img = document.createElement("img")
+            img.setAttribute("class","mr-3")
+            img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
+            img.setAttribute("alt","Not found")
+
+            const div = document.createElement("div");
+            const outerDiv = document.createElement("div");
+            outerDiv.setAttribute("class","media");
+            div.setAttribute("class","media-body");
+            
+            const anchor = document.createElement("a")
+
+            anchor.setAttribute("href","#")
+            anchor.addEventListener("click",e =>{
+                e.stopPropagation()
+                API.fetchBusiness(obj)
+            })
+            anchor.innerText = obj.name
+            div.appendChild(anchor)
+            // const element = document.getElementById("business-list");
+            const element = document.getElementById("newlyCreated");
+            createBusinessDiv(div,obj);
+            outerDiv.appendChild(img);
+            outerDiv.appendChild(div);
+            element.appendChild(outerDiv);
+        })
 }

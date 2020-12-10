@@ -31,13 +31,18 @@ function insertReviewData(user,target,review){
     editBtn.setAttribute("class", "btn btn-primary btn-sm") 
     editBtn.setAttribute("Data-id",`${review.id}`)
 
+    // delete review from business show page
+
     delBtn.addEventListener("click",(e) =>{
         if(confirm("Delete?")) {
             fetch(`http://localhost:3000/reviews/${e.target.dataset.id}`,{
                 method: "DELETE"
             })
             .then(resp => resp.json())
-            .then(resp => API.getUpdatedRating(review.business_id))
+            .then(resp => {
+                // get the updated rating from server
+                API.getUpdatedRating(review.business_id)})
+            // delete the review from DOM
             e.target.parentElement.remove()
         }
         
@@ -130,7 +135,11 @@ function createReviewFromNestedData(review){
     fetch("http://localhost:3000/reviews",configObj)
     .then(response => {
     return response.json()})
-    .then(obj => console.log(obj))
+    .then(obj => {
+        // debugger
+        //after the review is created , here I am creating a new div with updated rating so that the rating show up on the index page
+        newlyCreatedDivUpdate(obj.business_id)
+        console.log(obj)})
 }
 
 

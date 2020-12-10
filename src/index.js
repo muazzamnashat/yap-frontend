@@ -1,5 +1,3 @@
-
-
 window.addEventListener('DOMContentLoaded', (event) => {
 
   // console.log(process.env.GOOGLE_KEY)

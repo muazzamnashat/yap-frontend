@@ -167,6 +167,6 @@ function makeChangesToReview(review_id, rating,content) {
 
 function updateRating(obj){
     // debugger
-    document.getElementById(`rating-${obj.id}`).innerText = `Rating: ${obj.rating}`
+    document.querySelectorAll(`#rating-${obj.id}`).forEach(rating => rating.innerHTML = `<b>Rating:</b> ${obj.rating}`)
 }
 

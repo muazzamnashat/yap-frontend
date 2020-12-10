@@ -15,7 +15,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("write-review-form").innerHTML="";
     document.getElementById("results").innerHTML="";
     document.getElementById("search-result").innerHTML="";
-    location.reload();
   })
 
   document.getElementById("search-bar").addEventListener("input", e => {
@@ -44,6 +43,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       displaySearchResult(result);
     })
   })
+
 
 })
   

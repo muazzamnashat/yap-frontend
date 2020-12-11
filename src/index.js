@@ -18,16 +18,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("search-result").innerHTML="";
   })
 
+// to prevent showing duplicate results, keep track of the names already showing up on search result
+  let restaurant_names =[]
   document.getElementById("search-bar").addEventListener("input", e => {
+    let result = [];
     if (e.target.value.length > 3){
-      let result = []
         fetch(`${HOME_URL}businesses`)
           .then(response => response.json())
           .then(response => {
             const resultDisplay = document.getElementById("search-result");
               response.forEach(obj => {
-                if (obj.name.toLowerCase().indexOf(e.target.value) > -1){
-                  result.push(obj)
+                let search_result_exist_in_db = obj.name.toLowerCase().indexOf(e.target.value) > -1;
+                let already_in_the_list = restaurant_names.includes(obj.name)
+                if ( search_result_exist_in_db && !already_in_the_list){
+                  result.push(obj);
+                  restaurant_names.push(obj.name);
                   let node = document.createElement("a")
                   node.setAttribute("href","#")
                   node.setAttribute("class","list-group-item list-group-item-action")
@@ -37,12 +42,23 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     Business.loadBusiness(obj);
                   })
                   if (resultDisplay.childNodes.length < 5) resultDisplay.appendChild(node)
-                } 
+                }
               })    
           })
       document.getElementById("search-bar").addEventListener("submit", e => {
-        document.getElementById("search-bar").reset();
+        // e.preventDefault();
+        // if (result.length === 0){
+        //   document.getElementById("results").innerHTML = "<h2>search result not found!</h2>"
+        //   setTimeout(() => {
+        //     document.getElementById("results").innerHTML = ""
+        //   },1000)
+        // } else {
+        //   restaurant_names = [];
+        // }
+        // debugger
         displaySearchResult(result);
+        document.getElementById("search-bar").reset();
+        
       })
     }
   })

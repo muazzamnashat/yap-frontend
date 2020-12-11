@@ -94,7 +94,7 @@ function createBusinessDiv(target, object){
     desc.innerHTML = `<b>Description:</b> ${object.description}`
     target.appendChild(desc)
 
-    address.innerHTML = `<b>Address:</b> ${object.address}`
+    address.innerHTML = `<b>Address:</b> ${object.address}, ${object.state} , ${object.zip}`
     target.appendChild(address)
 
     website.innerHTML = `<b>Website:</b> ${object.website}`
@@ -109,8 +109,10 @@ document.getElementById("write-review").addEventListener("click", e => {
     e.preventDefault();
     App.hideAllElements();
     const formDiv= document.getElementById("write-review-form")
-    const form = document.createElement("form")
 
+    // create business form
+    const form = document.createElement("form")
+    form.id = "create-business-form"
     // for google api
     const searchForm = `
     <p>Review your favorite businesses and share your experiences with our community.</p>
@@ -154,15 +156,16 @@ document.getElementById("write-review").addEventListener("click", e => {
         }
 
         if (e.target.value.length > 3){
-            fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours&key=${ENV.GOOGLE_KEY}`)
+            fetch(`https://www.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=${ENV.GOOGLE_KEY}`)
             .then(response => response.json())
             .then(resp => {
                 // debugger
                 const display = document.getElementById("google-search-result")
                 // result array prevent duplicates result
                 if (! result.includes(`${resp.candidates[0].formatted_address}`)){
+                    const name = resp.candidates[0].name
                     display.innerHTML += 
-                    `<br><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample-${resp.candidates[0].geometry.location.lat}" aria-expanded="false" aria-controls="collapseExample-${resp.candidates[0].geometry.location.lat}">
+                    `<br><br><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample-${resp.candidates[0].geometry.location.lat}" aria-expanded="false" aria-controls="collapseExample-${resp.candidates[0].geometry.location.lat}">
                     ${resp.candidates[0].name}
                     </button>
                     <div class="collapse" id="collapseExample-${resp.candidates[0].geometry.location.lat}">
@@ -170,14 +173,25 @@ document.getElementById("write-review").addEventListener("click", e => {
                             <b>Name:</b> ${resp.candidates[0].name}  <br>
                             <b>Address:</b> ${resp.candidates[0].formatted_address} <br>
                             <b>Rating:</b> ${resp.candidates[0].rating} <br>
-                            <button type="button" class="btn btn-outline-primary btn-sm">Add</button>
                         </div>
                     </div><br>
                     `
+                    // <button type="button" class="btn btn-outline-primary btn-sm" onclick= "fillUpForm(${resp.candidates[0]})">Add</button>
+                    const btn = document.createElement("button");
+                    btn.setAttribute("class","btn btn-outline-primary btn-sm");
+                    btn.innerText = "Add";
+                    btn.addEventListener("click",e =>{
+                        e.stopPropagation()
+                        fillUpForm(resp.candidates[0])
+                    
+                        // debugger
+                    })
+
+                    display.appendChild(btn)
                     count ++; 
                     result.push(`${resp.candidates[0].formatted_address}`);
                     // debugger
-                    console.log(resp.candidates)
+                    // console.log(resp.candidates)
                 } 
             })        
         }
@@ -186,6 +200,8 @@ document.getElementById("write-review").addEventListener("click", e => {
     })
 })
 
+
+// create business form
 function createBusinessForm(){
     return `
     <div class="form-row">
@@ -285,4 +301,14 @@ function newlyCreatedDivUpdate(business_id){
             outerDiv.appendChild(div);
             element.appendChild(outerDiv);
         })
+}
+
+function fillUpForm(details){
+    console.log(details)
+    document.getElementById("google-search-result").innerHTML=""
+    const form = document.getElementById("create-business-form")
+    form.name.value = details.name
+    form.address.value = details.formatted_address
+    form.rating.value = Math.ceil(details.rating)
+    form.price.value = details.price_level
 }

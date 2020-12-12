@@ -14,32 +14,77 @@ class Business{
 
     //  get the object from API call and create each businesses and attach to the list (Index page)
     static insertBusinessesToList(object){
+        // const list = document.getElementById("business-list");
+        // const outerDiv = document.createElement("div");
+        // outerDiv.setAttribute("class","media");
+        // const div = document.createElement("div")
+        // div.setAttribute("class","media-body")
+        // const img = document.createElement("img")
+        // img.setAttribute("class","mr-3")
+        // img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
+        // img.setAttribute("alt","Not found")
+
         const list = document.getElementById("business-list");
-        const outerDiv = document.createElement("div");
-        outerDiv.setAttribute("class","media");
         const div = document.createElement("div")
-        div.setAttribute("class","media-body")
+        div.setAttribute("class","col-lg-3 col-md-6 mb-4 w-30 p-3")
+        const innerDiv = document.createElement("div")
+        innerDiv.setAttribute("class","card h-100")
         const img = document.createElement("img")
-        img.setAttribute("class","mr-3")
+        img.setAttribute("class","card-img-top")
         img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
         img.setAttribute("alt","Not found")
 
+
+{/* <div class="card-deck">
+  <div class="card">
+    <img class="card-img-top" src="..." alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+    </div>
+  </div> */}
+
+
+  const anchor = document.createElement("a")
+        anchor.setAttribute("href","#")
+        anchor.setAttribute("class","card-title")
+        anchor.addEventListener("click",e =>{
+            document.getElementById("welcome-hdr").classList.remove("background");
+            e.stopPropagation();
+            API.fetchBusiness(object);
+        })
+        anchor.innerText = object.name
+
+
+
         // takes to the business show page
-        const anchor = document.createElement("a")
+        {/* const anchor = document.createElement("a")
         anchor.setAttribute("href","#")
         anchor.setAttribute("class","mt-0")
         anchor.addEventListener("click",e =>{
             e.stopPropagation();
             API.fetchBusiness(object);
         })
-        anchor.innerText = object.name
+        anchor.innerText = object.name */}
         
-        div.appendChild(anchor)
-        div.dataset.tabFor= object.id
-        createBusinessDiv(div, object)
-        outerDiv.appendChild(img);
-        outerDiv.appendChild(div);
-        list.appendChild(outerDiv);
+        const innerMostDiv = document.createElement("div")
+        innerMostDiv.setAttribute("class","card-body")
+        innerMostDiv.appendChild(anchor)
+        innerMostDiv.dataset.tabFor= object.id
+        createBusinessDiv(innerMostDiv, object)
+        innerDiv.appendChild(img);
+        innerDiv.appendChild(innerMostDiv);
+        div.appendChild(innerDiv);
+        list.appendChild(div);
+
+
+        // div.appendChild(anchor)
+        // div.dataset.tabFor= object.id
+        // createBusinessDiv(div, object)
+        // outerDiv.appendChild(img);
+        // outerDiv.appendChild(div);
+        // list.appendChild(outerDiv);
     }
 
     static loadBusiness(object){
@@ -62,7 +107,7 @@ class Business{
             e.target.reset();
             API.getUpdatedRating(object.id)
         })
-        reviews.innerHTML = `<p>Recommended Reviews</p>`
+        reviews.innerHTML = `<p><b>Recommended Reviews</b></p>`
 
         document.getElementById("business-show").innerHTML = `<h2>${object.name}</h2>`
 
@@ -80,28 +125,43 @@ class Business{
 }
 
 function createBusinessDiv(target, object){
+
+    const p = document.createElement("p");
+    p.setAttribute("class","card-text")
+    p.innerHTML = `
+        <p id= "rating-${object.id}"><b>Rating:</b> ${object.rating}</p>
+        <p>
+        <b>Description:</b> ${object.description}<br>
+        <b>Address:</b> ${object.address}, ${object.state} , ${object.zip}<br>
+        <b>Website:</b> ${object.website}<br>
+        <b>Contact:</b> ${object.contact}<br>
+        </p>
+        `
+
+    target.appendChild(p)
+
    
-    const rating = document.createElement("p");
-    const desc = document.createElement("p");
-    const address = document.createElement("p");
-    const website = document.createElement("p");
-    const contact = document.createElement("p");
+    // const rating = document.createElement("p");
+    // const desc = document.createElement("p");
+    // const address = document.createElement("p");
+    // const website = document.createElement("p");
+    // const contact = document.createElement("p");
 
-    rating.innerHTML = `<b>Rating:</b> ${object.rating}`
-    rating.id = `rating-${object.id}`
-    target.appendChild(rating)
+    // rating.innerHTML = `<b>Rating:</b> ${object.rating}`
+    // rating.id = `rating-${object.id}`
+    // target.appendChild(rating)
 
-    desc.innerHTML = `<b>Description:</b> ${object.description}`
-    target.appendChild(desc)
+    // desc.innerHTML = `<b>Description:</b> ${object.description}`
+    // target.appendChild(desc)
 
-    address.innerHTML = `<b>Address:</b> ${object.address}, ${object.state} , ${object.zip}`
-    target.appendChild(address)
+    // address.innerHTML = `<b>Address:</b> ${object.address}, ${object.state} , ${object.zip}`
+    // target.appendChild(address)
 
-    website.innerHTML = `<b>Website:</b> ${object.website}`
-    target.appendChild(website)
+    // website.innerHTML = `<b>Website:</b> ${object.website}`
+    // target.appendChild(website)
 
-    contact.innerHTML = `<b>Contact:</b> ${object.contact}`
-    target.appendChild(contact)
+    // contact.innerHTML = `<b>Contact:</b> ${object.contact}`
+    // target.appendChild(contact)
     
 }
 
@@ -117,9 +177,8 @@ document.getElementById("write-review").addEventListener("click", e => {
     const searchForm = `
     <p>Review your favorite businesses and share your experiences with our community.</p>
     <form class="input-group mb-3" id="search-business" >
-        <input id="search-bar-input" type="text" class="form-control" placeholder="Search Restaurant" > 
+        <input id="search-bar-input" type="text" class="form-control" placeholder="Search Google" > 
         <div class="input-group-append">
-        <input class="btn btn-primary" type="submit" value="Search">
         </div>
     </form> <br>
     <div id="google-search-result"></div>
@@ -156,7 +215,7 @@ document.getElementById("write-review").addEventListener("click", e => {
         }
 
         if (e.target.value.length > 3){
-            fetch(`https://www.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=${ENV.GOOGLE_KEY}`)
+            fetch(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=${ENV.GOOGLE_KEY}`)
             .then(response => response.json())
             .then(resp => {
                 // debugger

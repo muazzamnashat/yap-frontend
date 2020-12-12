@@ -55,9 +55,9 @@ function insertReviewData(user,target,review){
         makeChangesToReview(review_id, rating,content)
     })
 
-    p1.innerText = `User: ${user.first_name} ${user.last_name}`
-    p2.innerText = `${review.rating}`
-    p3.innerText = `${review.content}`
+    p1.innerHTML = `<b>User:</b> ${user.first_name} ${user.last_name}`
+    p2.innerHTML = `<b>Rating:</b>${review.rating}`
+    p3.innerHTML = `${review.content}`
 
     delBtn.innerText = "Delete"
     editBtn.innerText = "Confirm changes"
@@ -77,7 +77,7 @@ function insertReviewData(user,target,review){
 
 function createReviewForm(){
     return `
-    Write your review here!
+    <b>Write your review here!</b>
     <div class="form-group">
     <textarea id="content" class="form-control"  name="content"> </textarea><br>
     Rating: <select class="form-control"  name="rating" id="rating">

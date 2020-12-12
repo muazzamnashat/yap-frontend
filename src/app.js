@@ -28,6 +28,7 @@ class App {
     } 
 
     static hideAllElements(){
+        document.getElementById("welcome-hdr").classList.remove("background");
         document.getElementById("background").style.visibility = 'hidden';
         document.getElementById("write-review").style.visibility = 'hidden';
         document.getElementById("business-list").style.visibility = 'hidden';
@@ -35,7 +36,7 @@ class App {
     }
 
     static showAllBusinesses(){
-
+        document.getElementById("welcome-hdr").classList.add("background");
         document.getElementById("background").style.visibility = 'visible';
         document.getElementById("signup-div").innerHTML = '';
         document.getElementById("login-div").innerHTML = '';
@@ -80,6 +81,9 @@ const displaySearchResult = (result) => {
         anchor.setAttribute("href","#")
         anchor.addEventListener("click",e =>{
             e.stopPropagation();
+
+            //hide image when go from search result page to show page
+            document.getElementById("welcome-hdr").classList.remove("background");
             API.fetchBusiness(object);
             document.getElementById("results").innerHTML=""
         })

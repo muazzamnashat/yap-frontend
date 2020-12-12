@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
   }
   
   document.getElementById("welcome-tag").addEventListener("click",e => {
+    document.getElementById("welcome-hdr").classList.add("background");
     document.getElementById("business-list").style.visibility = 'visible';
     document.getElementById("write-review").style.visibility = 'visible';
     document.getElementById("background").style.visibility = 'visible';
@@ -38,6 +39,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
                   node.setAttribute("class","list-group-item list-group-item-action")
                   node.innerText = obj.name
                   node.addEventListener("click", e => {
+                    document.getElementById("welcome-hdr").classList.remove("background");
                     document.getElementById("search-bar").reset();
                     Business.loadBusiness(obj);
                   })
@@ -46,16 +48,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
               })    
           })
       document.getElementById("search-bar").addEventListener("submit", e => {
-        // e.preventDefault();
-        // if (result.length === 0){
-        //   document.getElementById("results").innerHTML = "<h2>search result not found!</h2>"
-        //   setTimeout(() => {
-        //     document.getElementById("results").innerHTML = ""
-        //   },1000)
-        // } else {
-        //   restaurant_names = [];
-        // }
-        // debugger
         displaySearchResult(result);
         document.getElementById("search-bar").reset();
         

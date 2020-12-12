@@ -7,7 +7,7 @@ class Review {
     }
 
     static createReview (target, review){
-        fetch(`http://localhost:3000/users/${review.user_id}`)
+        fetch(`${HOME_URL}users/${review.user_id}`)
         .then(response => response.json())
         .then(object => {
             insertReviewData(object,target,review);
@@ -35,7 +35,7 @@ function insertReviewData(user,target,review){
 
     delBtn.addEventListener("click",(e) =>{
         if(confirm("Delete?")) {
-            fetch(`http://localhost:3000/reviews/${e.target.dataset.id}`,{
+            fetch(`${HOME_URL}reviews/${e.target.dataset.id}`,{
                 method: "DELETE"
             })
             .then(resp => resp.json())
@@ -110,7 +110,7 @@ function sendReviewData(e,businessID,reviewsList){
     body: JSON.stringify(formData)
     };
 
-    fetch("http://localhost:3000/reviews",configObj)
+    fetch(`${HOME_URL}reviews`,configObj)
     .then(response => {
     return response.json()})
     .then(obj => {
@@ -132,7 +132,7 @@ function createReviewFromNestedData(review){
     body: JSON.stringify(review)
     };
 
-    fetch("http://localhost:3000/reviews",configObj)
+    fetch(`${HOME_URL}reviews`,configObj)
     .then(response => {
     return response.json()})
     .then(obj => {
@@ -156,7 +156,7 @@ function makeChangesToReview(review_id, rating,content) {
         body: JSON.stringify(data)
     } 
 
-    fetch(`http://localhost:3000/reviews/${review_id}`,configObj)
+    fetch(`${HOME_URL}reviews/${review_id}`,configObj)
     .then (response => response.json())
     .then (obj => {
         API.getUpdatedRating(obj.business_id);

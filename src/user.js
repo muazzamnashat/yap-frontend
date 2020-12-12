@@ -24,7 +24,7 @@ class User {
         body: JSON.stringify(formData)
         };
 
-        fetch("http://localhost:3000/users",configObj)
+        fetch(`${HOME_URL}users`,configObj)
         .then(response => {
         return response.json()})
         .then(obj => {
@@ -55,7 +55,7 @@ class User {
             body: JSON.stringify(formData)
             };
 
-        fetch("http://localhost:3000/login",configObj)
+        fetch(`${HOME_URL}login`,configObj)
         .then(response => {
         return response.json()})
         .then(obj => {
@@ -73,7 +73,7 @@ class User {
 
     static getUserById(id){
         
-        return fetch(`http://localhost:3000/users/${id}`)
+        return fetch(`${HOME_URL}users/${id}`)
         .then(response => response.json())
         .then(object => {
            return createUser(object)})

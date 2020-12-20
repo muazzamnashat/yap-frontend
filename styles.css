@@ -46,3 +46,17 @@ body, html {
 .read-more{
     padding-left: 70px;
 }
+
+
+
+#bz-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+#bz-img img {
+    flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
+}

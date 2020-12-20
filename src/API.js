@@ -6,11 +6,8 @@ class API {
             .then(response => response.json())
             .then(response => {
                 response.forEach(obj => {
-
                     const business = new Business(obj);
                     business.insertBusinessesToList("app")
-
-                    // Business.insertBusinessesToList(obj, "app")
                 })
             })
     }

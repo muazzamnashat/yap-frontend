@@ -85,9 +85,6 @@ function insertReviewData(user,target,review){
     innerDiv.appendChild(p3)
 
     div.appendChild(innerDiv)
-
-    // div.appendChild(p2)
-    // div.appendChild(p3)
   
     if(current_user.id === user.id){
         p2.setAttribute("contenteditable","true")
@@ -97,9 +94,6 @@ function insertReviewData(user,target,review){
         btnDiv.appendChild(editBtn)
 
         div.appendChild(btnDiv)
-
-        // div.appendChild(delBtn)
-        // div.appendChild(editBtn)
     } 
 
     target.appendChild(div)

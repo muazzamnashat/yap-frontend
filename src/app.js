@@ -68,6 +68,7 @@ class App {
 }
 
 const displaySearchResult = (result) => {
+
     // reset the result display div to prevent old results from showing up
     const result_display = document.querySelector("#results")
     if (result_display.childElementCount > 1) {

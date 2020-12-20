@@ -1,6 +1,7 @@
 class Business{
 
     constructor(props){
+        this.id = props.id
         this.name = props.name
         this.description = props.description
         this.address = props.address
@@ -8,12 +9,74 @@ class Business{
         this.zip = props.zip
         this.contact = props.contact
         this.website = props.website
-        // this.rating = props.rating
+        this.rating = props.rating
         this.price = props.price
+        this.reviews = props.reviews
+        this.image_url = "";
     }
 
     //  get the object from API call and create each businesses and attach to the list (Index page)
-    static insertBusinessesToList(object,appOrPrep){
+    
+    // static insertBusinessesToList(object,appOrPrep){
+
+    //     const list = document.getElementById("business-list");
+    //     const div = document.createElement("div")
+    //     div.setAttribute("class","col-lg-3 col-md-6 mb-4 w-30 p-3")
+    //     const innerDiv = document.createElement("div")
+    //     innerDiv.setAttribute("class","card h-100")
+    //     const img = document.createElement("img")
+    //     img.setAttribute("class","card-img-top")
+    //     img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
+    //     img.setAttribute("alt","Not found")
+
+    //     const title = document.createElement("p")
+    //     title.setAttribute("class","card-title")
+    //     title.innerHTML = `<b>${object.name}</b>`
+
+    //     // const anchor = document.createElement("a")
+    //     // anchor.setAttribute("href","#")
+    //     // anchor.setAttribute("class","card-title")
+    //     // anchor.addEventListener("click",e =>{
+    //     //     document.getElementById("welcome-hdr").classList.remove("background");
+    //     //     e.stopPropagation();
+    //     //     API.fetchBusiness(object);
+    //     // })
+    //     // anchor.innerText = object.name
+
+    //     const innerMostDiv = document.createElement("div")
+    //     innerMostDiv.setAttribute("class","card-body")
+    //     // innerMostDiv.appendChild(anchor)
+    //     innerMostDiv.appendChild(title)
+    //     innerMostDiv.dataset.tabFor= object.id
+    //     createBusinessDiv(innerMostDiv, object)
+    //     innerDiv.appendChild(img);
+    //     innerDiv.appendChild(innerMostDiv);
+    //     div.appendChild(innerDiv);
+
+    //     const a = document.createElement("a")
+    //     a.innerText = "Read more"
+    //     a.classList.add("read-more") 
+    //     a.setAttribute("href","#")
+    //     a.addEventListener("click",e =>{
+    //         document.getElementById("welcome-hdr").classList.remove("background");
+    //         // debugger
+    //         e.stopPropagation();
+    //         API.fetchBusiness(object);
+    //         // document.querySelectorAll(".bz-desc").forEach(i => i.classList.remove("bz-desc") )
+
+    //     })
+    //     innerDiv.appendChild(a)
+
+
+    //     if (appOrPrep === "app") {
+    //         list.appendChild(div);
+    //     } else if (appOrPrep === "prep") {
+    //         list.prepend(div);
+    //     }
+     
+    // }
+
+    insertBusinessesToList(appOrPrep){
 
         const list = document.getElementById("business-list");
         const div = document.createElement("div")
@@ -27,7 +90,7 @@ class Business{
 
         const title = document.createElement("p")
         title.setAttribute("class","card-title")
-        title.innerHTML = `<b>${object.name}</b>`
+        title.innerHTML = `<b>${this.name}</b>`
 
         // const anchor = document.createElement("a")
         // anchor.setAttribute("href","#")
@@ -35,16 +98,16 @@ class Business{
         // anchor.addEventListener("click",e =>{
         //     document.getElementById("welcome-hdr").classList.remove("background");
         //     e.stopPropagation();
-        //     API.fetchBusiness(object);
+        //     API.fetchBusiness(this);
         // })
-        // anchor.innerText = object.name
+        // anchor.innerText = this.name
 
         const innerMostDiv = document.createElement("div")
         innerMostDiv.setAttribute("class","card-body")
         // innerMostDiv.appendChild(anchor)
         innerMostDiv.appendChild(title)
-        innerMostDiv.dataset.tabFor= object.id
-        createBusinessDiv(innerMostDiv, object)
+        innerMostDiv.dataset.tabFor= this.id
+        createBusinessDiv(innerMostDiv, this)
         innerDiv.appendChild(img);
         innerDiv.appendChild(innerMostDiv);
         div.appendChild(innerDiv);
@@ -57,7 +120,7 @@ class Business{
             document.getElementById("welcome-hdr").classList.remove("background");
             // debugger
             e.stopPropagation();
-            API.fetchBusiness(object);
+            API.fetchBusiness(this);
             // document.querySelectorAll(".bz-desc").forEach(i => i.classList.remove("bz-desc") )
 
         })
@@ -72,8 +135,45 @@ class Business{
      
     }
 
-    static loadBusiness(object){
+    // static loadBusiness(object){
 
+    //     const element = document.getElementById("business-list")
+    //     const reviewButton = document.getElementById("write-review")
+    //     const background = document.getElementById("background")
+    //     background.style.visibility = 'hidden';
+    //     element.style.visibility = 'hidden';
+    //     reviewButton.style.visibility = 'hidden';
+    //     const div = document.createElement("div")
+    //     div.setAttribute("class","container-fluid")
+    //     const reviews = document.createElement("div")
+    //     const form = document.createElement("form")
+    //     form.setAttribute("class","container-fluid")
+    //     form.setAttribute("data-business-ID",object.id)
+    //     form.addEventListener("submit",e => {
+    //         e.preventDefault();
+    //         sendReviewData(e,object.id,reviews);
+    //         e.target.reset();
+    //         API.getUpdatedRating(object.id)
+    //     })
+    //     reviews.innerHTML = `<p><b>Recommended Reviews</b></p>`
+
+    //     document.getElementById("business-show").innerHTML = `<h2>${object.name}</h2>`
+
+    //     // create business description on the business show page
+    //     createBusinessDiv(div, object)
+        
+    //     object.reviews.forEach(review => Review.createReview(reviews,review))
+    //     div.appendChild(reviews)
+    //     document.getElementById("business-show").appendChild(div)
+    //     form.innerHTML = createReviewForm()
+    //     document.getElementById("business-show").appendChild(form)
+    //     // to prevent it from hiding when get back to this like from welcome yap logo click
+    //     document.getElementById("business-show").style.visibility="visible";
+    // }
+
+
+    loadBusiness(){
+        
         const element = document.getElementById("business-list")
         const reviewButton = document.getElementById("write-review")
         const background = document.getElementById("background")
@@ -85,21 +185,21 @@ class Business{
         const reviews = document.createElement("div")
         const form = document.createElement("form")
         form.setAttribute("class","container-fluid")
-        form.setAttribute("data-business-ID",object.id)
+        form.setAttribute("data-business-ID",this.id)
         form.addEventListener("submit",e => {
             e.preventDefault();
-            sendReviewData(e,object.id,reviews);
+            sendReviewData(e,this.id,reviews);
             e.target.reset();
-            API.getUpdatedRating(object.id)
+            API.getUpdatedRating(this.id)
         })
         reviews.innerHTML = `<p><b>Recommended Reviews</b></p>`
 
-        document.getElementById("business-show").innerHTML = `<h2>${object.name}</h2>`
+        document.getElementById("business-show").innerHTML = `<h2>${this.name}</h2>`
 
         // create business description on the business show page
-        createBusinessDiv(div, object)
+        createBusinessDiv(div, this)
         
-        object.reviews.forEach(review => Review.createReview(reviews,review))
+        this.reviews.forEach(review => Review.createReview(reviews,review))
         div.appendChild(reviews)
         document.getElementById("business-show").appendChild(div)
         form.innerHTML = createReviewForm()
@@ -110,7 +210,6 @@ class Business{
 }
 
 function createBusinessDiv(target, object){
-
     const p = document.createElement("p");
     p.classList.add("bz-desc")
     // p.setAttribute("class","card-text")
@@ -292,7 +391,8 @@ function newlyCreatedDivUpdate(business_id){
     fetch(`${HOME_URL}businesses/${business_id}`)
         .then(response => response.json())
         .then(object => {
-            Business.insertBusinessesToList(object,"prep")
+            const business = new Business(object)
+            business.insertBusinessesToList("prep")
         })
 }
 

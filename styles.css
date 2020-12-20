@@ -15,7 +15,8 @@ body, html {
 #search-bar{
     margin: auto;
     width: 40%;
-    padding-top: 50px;
+    padding-top: 150px;
+    padding-bottom: 150px;
 }
 
 .search{
@@ -30,6 +31,10 @@ body, html {
 #logo{
     width: 60px;
     height: 50px;
+}
+
+#welcome-tag:hover{
+    cursor: pointer;
 }
 
 .bz-desc{

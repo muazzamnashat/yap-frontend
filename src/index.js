@@ -18,7 +18,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("results").innerHTML="";
     document.getElementById("search-result").innerHTML="";
     document.querySelectorAll(".bz-desc-2").forEach(i => {
-      // to get description overflow to hidden for all 
+      // to get description overflow to active for all 
       i.classList.remove("bz-desc-2")
       i.classList.add("bz-desc") })
   })
@@ -46,14 +46,20 @@ window.addEventListener('DOMContentLoaded', (event) => {
                     document.getElementById("welcome-hdr").classList.remove("background");
                     document.getElementById("search-bar").reset();
                     Business.loadBusiness(obj);
+                    handleDescription();
+                    result = [];
+                    restaurant_names = [];
                   })
                   if (resultDisplay.childNodes.length < 5) resultDisplay.appendChild(node)
                 }
               })    
           })
       document.getElementById("search-bar").addEventListener("submit", e => {
+        handleDescription();
         displaySearchResult(result);
         document.getElementById("search-bar").reset();
+        result = [];
+        restaurant_names = [];
         
       })
     }

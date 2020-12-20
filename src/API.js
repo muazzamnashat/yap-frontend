@@ -16,12 +16,7 @@ class API {
             .then(response => response.json())
             .then(response => {
                 Business.loadBusiness(response)
-                document.querySelectorAll(".bz-desc").forEach(i => {
-                    // when business show page load , remove the overflow hidden to prevent description from cutting out
-                    i.classList.remove("bz-desc");
-                    i.classList.add("bz-desc-2");
-                })
-
+                handleDescription();
             })
     }
 

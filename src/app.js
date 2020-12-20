@@ -81,11 +81,10 @@ const displaySearchResult = (result) => {
         anchor.setAttribute("href","#")
         anchor.addEventListener("click",e =>{
             e.stopPropagation();
-
             //hide image when go from search result page to show page
             document.getElementById("welcome-hdr").classList.remove("background");
             API.fetchBusiness(object);
-            document.getElementById("results").innerHTML=""
+            document.getElementById("results").innerHTML="";
         })
         anchor.innerText = object.name
         div.appendChild(anchor)
@@ -93,5 +92,13 @@ const displaySearchResult = (result) => {
         createBusinessDiv(div, object)
 
         document.getElementById("results").appendChild(div) 
+    })
+}
+
+handleDescription = () => {
+    document.querySelectorAll(".bz-desc").forEach(i => {
+        // when business show page load , remove the overflow hidden to prevent description from cutting out
+        i.classList.remove("bz-desc");
+        i.classList.add("bz-desc-2");
     })
 }

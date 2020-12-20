@@ -25,24 +25,42 @@ class Business{
         img.setAttribute("src",`http://lorempixel.com/g/400/200/food/${Math.floor(Math.random() * 11)}/`)
         img.setAttribute("alt","Not found")
 
-        const anchor = document.createElement("a")
-        anchor.setAttribute("href","#")
-        anchor.setAttribute("class","card-title")
-        anchor.addEventListener("click",e =>{
-            document.getElementById("welcome-hdr").classList.remove("background");
-            e.stopPropagation();
-            API.fetchBusiness(object);
-        })
-        anchor.innerText = object.name
+        const title = document.createElement("p")
+        title.setAttribute("class","card-title")
+        title.innerHTML = `<b>${object.name}</b>`
+
+        // const anchor = document.createElement("a")
+        // anchor.setAttribute("href","#")
+        // anchor.setAttribute("class","card-title")
+        // anchor.addEventListener("click",e =>{
+        //     document.getElementById("welcome-hdr").classList.remove("background");
+        //     e.stopPropagation();
+        //     API.fetchBusiness(object);
+        // })
+        // anchor.innerText = object.name
 
         const innerMostDiv = document.createElement("div")
         innerMostDiv.setAttribute("class","card-body")
-        innerMostDiv.appendChild(anchor)
+        // innerMostDiv.appendChild(anchor)
+        innerMostDiv.appendChild(title)
         innerMostDiv.dataset.tabFor= object.id
         createBusinessDiv(innerMostDiv, object)
         innerDiv.appendChild(img);
         innerDiv.appendChild(innerMostDiv);
         div.appendChild(innerDiv);
+
+        const a = document.createElement("a")
+        a.innerText = "Read more"
+        a.classList.add("read-more") 
+        a.setAttribute("href","#")
+        a.addEventListener("click",e =>{
+            document.getElementById("welcome-hdr").classList.remove("background");
+            e.stopPropagation();
+            API.fetchBusiness(object);
+        })
+        innerDiv.appendChild(a)
+
+
         if (appOrPrep === "app") {
             list.appendChild(div);
         } else if (appOrPrep === "prep") {
@@ -91,6 +109,7 @@ class Business{
 function createBusinessDiv(target, object){
 
     const p = document.createElement("p");
+    p.id="bz-desc"
     p.setAttribute("class","card-text")
     p.innerHTML = `
         <p id= "rating-${object.id}"><b>Rating:</b> ${object.rating}</p>

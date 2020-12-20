@@ -185,7 +185,7 @@ document.getElementById("write-review").addEventListener("click", e => {
                 if (! result.includes(`${resp.candidates[0].formatted_address}`)){
                     const name = resp.candidates[0].name
                     display.innerHTML += 
-                    `<br><br><button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample-${resp.candidates[0].geometry.location.lat}" aria-expanded="false" aria-controls="collapseExample-${resp.candidates[0].geometry.location.lat}">
+                    `<br><br><button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample-${resp.candidates[0].geometry.location.lat}" aria-expanded="false" aria-controls="collapseExample-${resp.candidates[0].geometry.location.lat}">
                     ${resp.candidates[0].name}
                     </button>
                     <div class="collapse" id="collapseExample-${resp.candidates[0].geometry.location.lat}">
@@ -196,9 +196,9 @@ document.getElementById("write-review").addEventListener("click", e => {
                         </div>
                     </div><br>
                     `
-                    // <button type="button" class="btn btn-outline-primary btn-sm" onclick= "fillUpForm(${resp.candidates[0]})">Add</button>
+                    // <button type="button" class="btn btn-outline-secondary btn-sm" onclick= "fillUpForm(${resp.candidates[0]})">Add</button>
                     const btn = document.createElement("button");
-                    btn.setAttribute("class","btn btn-outline-primary btn-sm");
+                    btn.setAttribute("class","btn btn-outline-secondary btn-sm");
                     btn.innerText = "Add";
                     btn.addEventListener("click",e =>{
                         e.stopPropagation()
@@ -244,7 +244,7 @@ function createBusinessForm(){
             <input class="form-control" type="text" name="website" placeholder="Website"><br>
         </div>
     </div>
-    <input  class="btn btn-primary" type="submit" value="Submit">
+    <input  class="btn btn-secondary" type="submit" value="Submit">
     `
 }
 

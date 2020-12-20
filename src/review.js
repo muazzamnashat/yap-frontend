@@ -19,16 +19,33 @@ class Review {
 function insertReviewData(user,target,review){
     const current_user = JSON.parse(localStorage.getItem("current_user"))
     const div = document.createElement("div")
+    const innerDiv = document.createElement("div")
+
+
+    div.setAttribute("class","card border-dark mb-3")
+
+    innerDiv.setAttribute("class","card-body text-dark")
+
+
     const p1 = document.createElement("p")
+    p1.setAttribute("class","card-header")
+
     const p2 = document.createElement("p")
+    p2.setAttribute("class","card-title")
+
     const p3 = document.createElement("p")
+    p3.setAttribute("class","card-text")
+
+    const btnDiv = document.createElement("div")
+    btnDiv.setAttribute("class","d-grid gap-2 col-6")
+
     const delBtn = document.createElement("button")
     const editBtn = document.createElement("button")
 
-    delBtn.setAttribute("class","btn btn-primary btn-sm")
+    delBtn.setAttribute("class","btn btn-secondary btn-sm")
     delBtn.setAttribute("style","margin-right:16px")
     delBtn.setAttribute("Data-id",`${review.id}`)
-    editBtn.setAttribute("class", "btn btn-primary btn-sm") 
+    editBtn.setAttribute("class", "btn btn-secondary btn-sm") 
     editBtn.setAttribute("Data-id",`${review.id}`)
 
     // delete review from business show page
@@ -43,14 +60,15 @@ function insertReviewData(user,target,review){
                 // get the updated rating from server
                 API.getUpdatedRating(review.business_id)})
             // delete the review from DOM
-            e.target.parentElement.remove()
+            e.target.parentElement.parentElement.remove()
         }
         
     })
 
     editBtn.addEventListener("click", e => {
         const review_id = e.target.dataset.id;
-        const rating = p2.innerText
+        const rating = p2.innerText.slice(-1)
+        // debugger
         const content = p3.innerText
         makeChangesToReview(review_id, rating,content)
     })
@@ -62,14 +80,26 @@ function insertReviewData(user,target,review){
     delBtn.innerText = "Delete"
     editBtn.innerText = "Confirm changes"
     div.appendChild(p1)
-    div.appendChild(p2)
-    div.appendChild(p3)
+
+    innerDiv.appendChild(p2)
+    innerDiv.appendChild(p3)
+
+    div.appendChild(innerDiv)
+
+    // div.appendChild(p2)
+    // div.appendChild(p3)
   
     if(current_user.id === user.id){
         p2.setAttribute("contenteditable","true")
         p3.setAttribute("contenteditable","true")
-        div.appendChild(delBtn)
-        div.appendChild(editBtn)
+
+        btnDiv.appendChild(delBtn)
+        btnDiv.appendChild(editBtn)
+
+        div.appendChild(btnDiv)
+
+        // div.appendChild(delBtn)
+        // div.appendChild(editBtn)
     } 
 
     target.appendChild(div)
@@ -88,7 +118,7 @@ function createReviewForm(){
         <option value=5>5</option>
     </select>
     </div>
-    <input class="btn btn-primary" type="submit" value="Submit">
+    <input class="btn btn-secondary" type="submit" value="Submit">
     `
 }
 

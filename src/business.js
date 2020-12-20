@@ -55,8 +55,11 @@ class Business{
         a.setAttribute("href","#")
         a.addEventListener("click",e =>{
             document.getElementById("welcome-hdr").classList.remove("background");
+            // debugger
             e.stopPropagation();
             API.fetchBusiness(object);
+            // document.querySelectorAll(".bz-desc").forEach(i => i.classList.remove("bz-desc") )
+
         })
         innerDiv.appendChild(a)
 
@@ -109,8 +112,8 @@ class Business{
 function createBusinessDiv(target, object){
 
     const p = document.createElement("p");
-    p.id="bz-desc"
-    p.setAttribute("class","card-text")
+    p.classList.add("bz-desc")
+    // p.setAttribute("class","card-text")
     p.innerHTML = `
         <p id= "rating-${object.id}"><b>Rating:</b> ${object.rating}</p>
         <p>

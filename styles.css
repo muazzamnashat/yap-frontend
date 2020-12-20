@@ -33,7 +33,7 @@ body, html {
     height: 50px;
 }
 
-#bz-desc{
+.bz-desc{
     width:150px;
     height:200px;
     overflow: hidden;

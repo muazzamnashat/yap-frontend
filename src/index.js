@@ -17,6 +17,10 @@ window.addEventListener('DOMContentLoaded', (event) => {
     document.getElementById("write-review-form").innerHTML="";
     document.getElementById("results").innerHTML="";
     document.getElementById("search-result").innerHTML="";
+    document.querySelectorAll(".bz-desc-2").forEach(i => {
+      // to get description overflow to hidden for all 
+      i.classList.remove("bz-desc-2")
+      i.classList.add("bz-desc") })
   })
 
 // to prevent showing duplicate results, keep track of the names already showing up on search result

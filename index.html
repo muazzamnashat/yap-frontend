@@ -15,7 +15,12 @@
 <body>
     <nav class="navbar navbar-light bg-light">
         <span id="welcome-tag" class="navbar-brand mb-0 h1"> <img id="logo" src="src/images/logo.png" alt="logo"> </span>
+    
+        <button id= "logout" type="button" class="btn btn-secondary btn-sm" onclick="logout()">Log Out</button>
     </nav>
+
+    
+
 
     <!-- <h1 id="welcome-tag">create a logo here!</h1> -->
     <div class="container">
@@ -35,10 +40,6 @@
                     <input id="search-bar-input" type="text" class="form-control" placeholder="Search Restaurant">
                     <div class="input-group-append">
                         <input class="btn btn-secondary" type="submit" value="Search">
-                        <!---  --->
-                        <!-- <button type="button" class="btn btn-outline-primary">Search</button> -->
-                        <!-- <button class="btn btn-outline-secondary" type="button">Search</button> -->
-                        <!-- <button id= "search-bar-submit" type="button" class="btn btn-dark">Search</button> -->
                     </div>
                 </form> <br>
                 <div id="search-result" class="list-group search"> </div>

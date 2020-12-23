@@ -16,7 +16,7 @@ body, html {
     margin: auto;
     width: 40%;
     padding-top: 150px;
-    padding-bottom: 150px;
+    /* padding-bottom: 150px; */
 }
 
 .search{
@@ -59,4 +59,8 @@ body, html {
     flex-shrink: 0;
     min-width: 100%;
     min-height: 100%
+}
+
+#search-result{
+    padding-bottom: 200px;
 }

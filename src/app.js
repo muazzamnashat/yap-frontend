@@ -22,7 +22,7 @@ class App {
         <input class="form-control"  type="text" placeholder="Enter first name" name="first_name" required><br>
         <input class="form-control"  type="text" placeholder="Enter last name" name="last_name" required><br>
         <input class="form-control"  type="email" placeholder="Enter your email" name="email" required><br>
-        <button class="btn btn-primary" type="submit">Sign Up</button>
+        <button class="btn btn-secondary" type="submit">Sign Up</button>
         `
         div.appendChild(form)
     } 
@@ -61,7 +61,7 @@ class App {
         })
         form.innerHTML = `
         <input type="text" class="form-control" placeholder="Enter your email" name="email" required><br>
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-secondary" type="submit">Login</button>
         `
         div.appendChild(form)
     }
@@ -103,3 +103,11 @@ handleDescription = () => {
         i.classList.add("bz-desc-2");
     })
 }
+
+logout = () => {
+    localStorage.removeItem("current_user");
+    document.getElementById("login-div").style.visibility = 'visible';
+    App.loadSignupPage();
+    App.loadLoginPage();
+  }
+

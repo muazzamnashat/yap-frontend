@@ -117,8 +117,8 @@ function createBusinessDiv(target, object){
         <p>
         <b>Description:</b> ${object.description}<br>
         <b>Address:</b> ${object.address} ${object.state || ""} ${object.zip || ""}<br>
-        <b>Website:</b> ${object.website}<br>
-        <b>Contact:</b> ${object.contact}<br>
+        <b>Website:</b> ${object.website || "Not available"}<br>
+        <b>Contact:</b> ${object.contact || "Not available"}<br>
         </p>
         `
     target.appendChild(p)

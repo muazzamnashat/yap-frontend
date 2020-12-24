@@ -64,3 +64,7 @@ body, html {
 #search-result{
     padding-bottom: 200px;
 }
+
+.rating{
+    display: inline-block;
+}

@@ -19,6 +19,7 @@ class Review {
 function insertReviewData(user,target,review){
     const current_user = JSON.parse(localStorage.getItem("current_user"))
     const div = document.createElement("div")
+    div.setAttribute("data-review-id",`${review.rating}`)
     const innerDiv = document.createElement("div")
 
 
@@ -32,6 +33,7 @@ function insertReviewData(user,target,review){
 
     const p2 = document.createElement("p")
     p2.setAttribute("class","card-title")
+    p2.id = review.rating
 
     const p3 = document.createElement("p")
     p3.setAttribute("class","card-text")
@@ -68,8 +70,9 @@ function insertReviewData(user,target,review){
     editBtn.addEventListener("click", e => {
         const review_id = e.target.dataset.id;
         const rating = p2.innerText.slice(-1)
-        // debugger
         const content = p3.innerText
+        // change the dataset Id to ensure that we can sort right after editing without reload
+        e.target.parentElement.parentElement.dataset.reviewId = rating
         makeChangesToReview(review_id, rating,content)
     })
 
@@ -194,3 +197,17 @@ function updateRating(obj){
     document.querySelectorAll(`#rating-${obj.id}`).forEach(rating => rating.innerHTML = `<b>Rating:</b> ${obj.rating}`)
 }
 
+function sortReview(){
+    let categoryItems = document.querySelectorAll("[data-review-id]");
+            let categoryItemsArray = Array.from(categoryItems);
+            
+            let sorted = categoryItemsArray.sort(sorter);
+            
+            function sorter(a,b) {
+                if(a.dataset.reviewId < b.dataset. reviewId) return -1;
+                if(a.dataset. reviewId > b.dataset. reviewId) return 1;
+                return 0;
+            }
+            
+    sorted.forEach(e => document.querySelector("#reviews-list").appendChild(e))
+}

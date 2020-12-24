@@ -21,6 +21,8 @@ class API {
 
                 business.loadBusiness();
                 handleDescription();
+                // debugger
+                // sortReview();
             })
     }
 

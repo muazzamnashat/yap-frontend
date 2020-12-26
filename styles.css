@@ -68,3 +68,8 @@ body, html {
 .rating{
     display: inline-block;
 }
+
+i{
+    padding-top: 5px;
+    color: rgb(108,117,125)
+}

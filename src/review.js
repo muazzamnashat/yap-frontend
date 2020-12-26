@@ -193,21 +193,22 @@ function makeChangesToReview(review_id, rating,content) {
 
 
 function updateRating(obj){
-    // debugger
     document.querySelectorAll(`#rating-${obj.id}`).forEach(rating => rating.innerHTML = `<b>Rating:</b> ${obj.rating}`)
 }
 
-function sortReview(){
+function sortReview(e){
     let categoryItems = document.querySelectorAll("[data-review-id]");
-            let categoryItemsArray = Array.from(categoryItems);
-            
-            let sorted = categoryItemsArray.sort(sorter);
-            
-            function sorter(a,b) {
-                if(a.dataset.reviewId < b.dataset. reviewId) return -1;
-                if(a.dataset. reviewId > b.dataset. reviewId) return 1;
-                return 0;
-            }
-            
+    let categoryItemsArray = Array.from(categoryItems); 
+    let sorter;
+      if (e.target.dataset.type === "asc"){
+        e.target.dataset.type = "dsc"
+        sorter = (a,b) => {
+        return b.dataset.reviewId - a.dataset.reviewId}
+      } else {
+        e.target.dataset.type = "asc"
+        sorter = (a,b) => {
+        return a.dataset.reviewId - b.dataset.reviewId} 
+      } 
+    let sorted = categoryItemsArray.sort(sorter);      
     sorted.forEach(e => document.querySelector("#reviews-list").appendChild(e))
 }

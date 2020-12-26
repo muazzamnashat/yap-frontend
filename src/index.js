@@ -57,6 +57,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
               })    
           })
       document.getElementById("search-bar").addEventListener("submit", e => {
+        document.getElementById("sort").style.visibility = 'hidden'; 
         handleDescription();
         displaySearchResult(result);
         document.getElementById("search-bar").reset();
@@ -66,7 +67,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
       })
     }
   })
-
 })
   
 

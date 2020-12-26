@@ -33,6 +33,7 @@ class App {
         document.getElementById("write-review").style.visibility = 'hidden';
         document.getElementById("business-list").style.visibility = 'hidden';
         document.getElementById("business-show").style.visibility = 'hidden'; 
+        document.getElementById("sort").style.visibility = 'hidden'; 
     }
 
     static showAllBusinesses(){
@@ -44,6 +45,7 @@ class App {
         document.getElementById("write-review").style.visibility = 'visible';
         document.getElementById("business-list").style.visibility = 'visible';
         document.getElementById("business-show").innerHTML = ''; 
+        document.getElementById("sort").style.visibility = 'visible';
     }
 
     static loadLoginPage(){
@@ -65,6 +67,8 @@ class App {
         `
         div.appendChild(form)
     }
+
+    
 }
 
 const displaySearchResult = (result) => {
@@ -86,6 +90,8 @@ const displaySearchResult = (result) => {
             document.getElementById("welcome-hdr").classList.remove("background");
             API.fetchBusiness(object);
             document.getElementById("results").innerHTML="";
+            document.getElementById("sort").style.visibility = 'hidden'; 
+            
         })
         anchor.innerText = object.name
         div.appendChild(anchor)
@@ -111,3 +117,20 @@ logout = () => {
     App.loadLoginPage();
   }
 
+
+document.getElementById("sort").onclick=(e) => {
+let categoryItems = document.querySelectorAll("[data-rating]");
+let categoryItemsArray = Array.from(categoryItems);
+let sorter;
+    if (e.target.dataset.type === "asc"){
+    e.target.dataset.type = "dsc"
+    sorter = (a,b) => {
+    return b.dataset.rating - a.dataset.rating}
+    } else {
+    e.target.dataset.type = "asc"
+    sorter = (a,b) => {
+    return a.dataset.rating - b.dataset.rating} 
+    } 
+let sorted = categoryItemsArray.sort(sorter);
+sorted.forEach(e => document.querySelector("#business-list").appendChild(e))  
+}

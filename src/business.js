@@ -19,6 +19,7 @@ class Business{
 
         const list = document.getElementById("business-list");
         const div = document.createElement("div")
+        div.setAttribute("data-rating",`${this.rating}`)
         div.setAttribute("class","col-lg-3 col-md-6 mb-4 w-30 p-3")
         const innerDiv = document.createElement("div")
         innerDiv.setAttribute("class","card h-100")
@@ -54,6 +55,7 @@ class Business{
             document.getElementById("welcome-hdr").classList.remove("background");
             e.stopPropagation();
             API.fetchBusiness(this);
+            // debugger
             // sortReview();
             // setTimeout(sortReview,500)
             // document.querySelectorAll(".bz-desc").forEach(i => i.classList.remove("bz-desc") )
@@ -67,7 +69,6 @@ class Business{
         } else if (appOrPrep === "prep") {
             list.prepend(div);
         }
-     
     }
 
     loadBusiness(){
@@ -94,7 +95,13 @@ class Business{
             // document.querySelector("#reviews-list").childNodes[1].querySelectorAll(".card-title")[0].innerText.split(":")[1]
             
         })
-        reviews.innerHTML = `<p class="rating"><b>Recommended Reviews</b> </p> <button type="button" class="btn btn-secondary btn-sm rating float-right" onClick="sortReview()">Sort</button>`;
+        // reviews.innerHTML = `<p class="rating"><b>Recommended Reviews</b> </p> <button type="button" class="btn btn-secondary btn-sm rating float-right" onClick="sortReview()">Sort</button>`;
+
+        reviews.innerHTML = `<p class="rating"><b>Recommended Reviews</b> </p>
+        <i class="fas fa-sort fa-2x float-right" data-type="asc" onClick="sortReview(event)"></i><br>`;
+
+        
+
 
         const businessShowDiv = document.getElementById("business-show")
         businessShowDiv.innerHTML = `
@@ -104,22 +111,19 @@ class Business{
         // create business description on the business show page
         createBusinessDiv(div, this)
         
-        // this.reviews.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+        this.reviews.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
 
         // this.reviews.sort((a, b) => a.rating - b.rating)
-        // debugger
+        
         this.reviews.forEach(review => Review.createReview(reviews,review))
         
         div.appendChild(reviews)
+        // debugger
         businessShowDiv.appendChild(div)
         form.innerHTML = createReviewForm()
         businessShowDiv.appendChild(form)
         // to prevent it from hiding when get back to this like from welcome yap logo click
         businessShowDiv.style.visibility="visible";
-
-        
-    //    debugger
-
     }
 }
 

@@ -17,11 +17,8 @@ class API {
             .then(response => response.json())
             .then(response => {
                 const business = new Business(response);
-                // debugger
                 business.loadBusiness();
                 handleDescription();
-                // debugger
-                // sortReview();
             })
     }
 

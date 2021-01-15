@@ -4,6 +4,7 @@ class Review {
         this.rating = props.rating
         this.business_id = props.business_id
         this.user_id = props.user_id
+        this.user = props.user
     }
 
     static createReview (target, review){
@@ -11,12 +12,12 @@ class Review {
         .then(response => response.json())
         .then(object => {
             insertReviewData(object,target,review);
-        });
-        
+        })
     }
 }
 
 function insertReviewData(user,target,review){
+    
     const current_user = JSON.parse(localStorage.getItem("current_user"))
     const div = document.createElement("div")
     div.setAttribute("data-review-id",`${review.rating}`)
@@ -89,6 +90,8 @@ function insertReviewData(user,target,review){
 
     div.appendChild(innerDiv)
   
+    // if(current_user.id === user.id){
+
     if(current_user.id === user.id){
         p2.setAttribute("contenteditable","true")
         p3.setAttribute("contenteditable","true")

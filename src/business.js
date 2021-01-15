@@ -91,17 +91,11 @@ class Business{
             sendReviewData(e,this.id,reviews);
             e.target.reset();
             API.getUpdatedRating(this.id);
-            // setTimeout(sortReview,500)
-            // document.querySelector("#reviews-list").childNodes[1].querySelectorAll(".card-title")[0].innerText.split(":")[1]
             
         })
-        // reviews.innerHTML = `<p class="rating"><b>Recommended Reviews</b> </p> <button type="button" class="btn btn-secondary btn-sm rating float-right" onClick="sortReview()">Sort</button>`;
 
         reviews.innerHTML = `<p class="rating"><b>Recommended Reviews</b> </p>
         <i class="fas fa-sort fa-2x float-right" data-type="asc" onClick="sortReview(event)"></i><br>`;
-
-        
-
 
         const businessShowDiv = document.getElementById("business-show")
         businessShowDiv.innerHTML = `
@@ -111,19 +105,21 @@ class Business{
         // create business description on the business show page
         createBusinessDiv(div, this)
         
-        this.reviews.sort((a, b) => (a.rating > b.rating) ? 1 : -1)
+        this.reviews.sort((a, b) => a.rating - b.rating)
 
-        // this.reviews.sort((a, b) => a.rating - b.rating)
-        
-        this.reviews.forEach(review => Review.createReview(reviews,review))
-        
+        // this.reviews.forEach(review => Review.createReview(reviews,review))
+
+        this.reviews.forEach(review => insertReviewData(review.user,reviews,review))
+         
         div.appendChild(reviews)
-        // debugger
+        
         businessShowDiv.appendChild(div)
         form.innerHTML = createReviewForm()
         businessShowDiv.appendChild(form)
         // to prevent it from hiding when get back to this like from welcome yap logo click
         businessShowDiv.style.visibility="visible";
+
+        
     }
 }
 

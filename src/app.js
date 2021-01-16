@@ -52,10 +52,10 @@ class App {
     const form = document.createElement("form");
     const demo = () => {
       const obj = {
-        id: 722,
-        first_name: "Muazzam",
-        last_name: "Nashat",
-        email: "muazzamhc.nashat@gmail.com",
+        id: 25,
+        first_name: "Joslyn",
+        last_name: "Treutel",
+        email: "edgardo@hegmann.org",
       };
       localStorage.setItem("current_user", JSON.stringify(obj));
       App.run();
@@ -72,9 +72,15 @@ class App {
     form.innerHTML = `
         <input type="text" class="form-control" placeholder="Enter your email" name="email" required><br>
         <button class="btn btn-secondary" type="submit">Login</button>
-        <button class="btn btn-secondary" onclick="demo">Demo Login</button>
         `;
     div.appendChild(form);
+
+    const btn = document.createElement("button");
+    btn.classList = "btn btn-secondary";
+    btn.onclick = demo;
+    btn.innerText = "Demo";
+
+    div.appendChild(btn);
   }
 }
 

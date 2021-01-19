@@ -4,7 +4,7 @@ _Yap_ is a Single Page Application (SPA) that let users view, create and read re
 
 frontend: https://github.com/muazzamnashat/yap-frontend \
 backend: https://github.com/muazzamnashat/yap-backend \
-Live: https://yap-frontend.herokuapp.com/ \
+Live: https://yap-frontend.herokuapp.com/
 
 ## Technologies used
 

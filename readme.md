@@ -2,9 +2,9 @@
 
 _Yap_ is a Single Page Application (SPA) that let users view, create and read reviews about different restaurants around the world. This is a mvp version created within a very short time and requires future improvement.
 
-frontend: https://github.com/muazzamnashat/yap-frontend
-backend: https://github.com/muazzamnashat/yap-backend
-Live: https://yap-frontend.herokuapp.com/
+frontend: https://github.com/muazzamnashat/yap-frontend \
+backend: https://github.com/muazzamnashat/yap-backend \
+Live: https://yap-frontend.herokuapp.com/ \
 
 ## Technologies used
 

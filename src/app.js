@@ -45,6 +45,7 @@ class App {
     document.getElementById("business-list").style.visibility = "visible";
     document.getElementById("business-show").innerHTML = "";
     document.getElementById("sort").style.visibility = "visible";
+    document.getElementById("logout").style.visibility = "visible";
   }
 
   static loadLoginPage() {

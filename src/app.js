@@ -126,6 +126,7 @@ handleDescription = () => {
 logout = () => {
   localStorage.removeItem("current_user");
   document.getElementById("login-div").style.visibility = "visible";
+  document.getElementById("logout").style.visibility = "hidden";
   App.loadSignupPage();
   App.loadLoginPage();
 };

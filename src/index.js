@@ -5,7 +5,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   } else {
     App.loadSignupPage();
     App.loadLoginPage();
-    getElementById("logout").style.visibility = "hidden";
+    document.getElementById("logout").style.visibility = "hidden";
   }
 
   document.getElementById("welcome-tag").addEventListener("click", (e) => {

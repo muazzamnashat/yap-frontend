@@ -185,7 +185,7 @@ document.getElementById("write-review").addEventListener("click", (e) => {
 
     if (e.target.value.length > 3) {
       fetch(
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=${process.env.GOOGLE_KEY}`
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=AIzaSyDmArjjGoB4yQWdjrEUn5KFmgpIF7jT91U`
       )
         .then((response) => response.json())
         .then((resp) => {
@@ -197,7 +197,7 @@ document.getElementById("write-review").addEventListener("click", (e) => {
 
             details[
               "image_url"
-            ] = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${photo_reference}&key=${process.env.GOOGLE_KEY}`;
+            ] = `https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&photoreference=${photo_reference}&key=AIzaSyDmArjjGoB4yQWdjrEUn5KFmgpIF7jT91U`;
 
             display.innerHTML += `<br><br><button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#collapseExample-${resp.candidates[0].geometry.location.lat}" aria-expanded="false" aria-controls="collapseExample-${resp.candidates[0].geometry.location.lat}">
                     ${resp.candidates[0].name}

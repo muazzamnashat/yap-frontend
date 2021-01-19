@@ -185,7 +185,7 @@ document.getElementById("write-review").addEventListener("click", (e) => {
 
     if (e.target.value.length > 3) {
       fetch(
-        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=${process.env.GOOGLE_KEY}`
+        `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${searchTerm}&inputtype=textquery&fields=formatted_address,name,rating,photos,price_level,geometry,opening_hours,place_id&key=${ENV["GOOGLE_KEY"]}`
       )
         .then((response) => response.json())
         .then((resp) => {

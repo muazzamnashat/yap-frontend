@@ -1,46 +1,45 @@
 # Yap
 
-*Yap* is a Single Page Application (SPA) that let users view, create and read reviews about different restaurants around the world. This is a mvp version created within a very short time and requires future improvement.  
+_Yap_ is a Single Page Application (SPA) that let users view, create and read reviews about different restaurants around the world. This is a mvp version created within a very short time and requires future improvement.
 
 frontend: https://github.com/muazzamnashat/yap-frontend
 backend: https://github.com/muazzamnashat/yap-backend
+Live: https://yap-frontend.herokuapp.com/
 
 ## Technologies used
 
-* Rails
-* HTML
-* CSS
-* Bootstrap
-* Vanilla JS
-    
-## Features 
+- Rails
+- HTML
+- CSS
+- Bootstrap
+- Vanilla JS
 
-* Google Place API to search for restaurants
-* CRUD functionality
-      *  Users can CREATE, READ, UPDATE or DELETE data that belongs to them only
+## Features
+
+- Google Place API to search for restaurants
+- CRUD functionality \* Users can CREATE, READ, UPDATE or DELETE data that belongs to them only
 
 ## Future improvements
 
-* Messaging 
-* Google API to load photos 
-* User authentication using JWT 
-
+- Messaging
+- Google API to load photos
+- User authentication using JWT
 
 ## Installation & Setup
 
-* Go to https://github.com/muazzamnashat/yap-frontend to clone the frontend
-* Go to https://github.com/muazzamnashat/yap-backend to clone the backend
+- Go to https://github.com/muazzamnashat/yap-frontend to clone the frontend
+- Go to https://github.com/muazzamnashat/yap-backend to clone the backend
 
-* Clone the repository onto your computer. To clone :
-*  Click on the green "Code" button and select "HTTPS" 
-*  Copy the link 
-* Open your terminal and type pwd to see you current location (The folder you are in). If this is the right folder (this is where you want to clone the repo) or you can change directory.
-*  Now, on the terminal type 'git clone' then paste the link.
-*  Navigate to the the folder 
-* Run `bundle install` to load the Ruby gems and dependencies.
-* Run `rails db:migrate` to load the the database.
-* Run `rails s` to run the server.
-* Open index.html from the frontend repo in your browser and it will run.
+- Clone the repository onto your computer. To clone :
+- Click on the green "Code" button and select "HTTPS"
+- Copy the link
+- Open your terminal and type pwd to see you current location (The folder you are in). If this is the right folder (this is where you want to clone the repo) or you can change directory.
+- Now, on the terminal type 'git clone' then paste the link.
+- Navigate to the the folder
+- Run `bundle install` to load the Ruby gems and dependencies.
+- Run `rails db:migrate` to load the the database.
+- Run `rails s` to run the server.
+- Open index.html from the frontend repo in your browser and it will run.
 
 ## Contribution
 
